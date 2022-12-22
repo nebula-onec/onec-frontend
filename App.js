@@ -1,19 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
-import { AppState, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-// import  { createNativeStackNavigator } from '@react-navigation/native-stack';
+import  { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import SplashScreen from './assets/files/SplashScreen.js';
+import LoginScreen from './assets/files/LoginScreen.js';
 
 export default function App() {
+
+  
+  const Stack = createNativeStackNavigator();
+
   return (
-    <Text>Heelo, Meet</Text>
+      <NavigationContainer>
+      <Stack.Navigator initialRouteName="Splash">
+        <Stack.Screen 
+          name="Splash" 
+          component={SplashScreen}
+          options={{
+            headerShown: false,
+          }}
+         />
+        <Stack.Screen 
+          name="Login" 
+          component={LoginScreen}
+          options={{
+            headerShown: false,
+          }}
+         />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
