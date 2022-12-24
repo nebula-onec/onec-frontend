@@ -7,7 +7,6 @@ import SplashScreen from './assets/files/SplashScreen.js';
 import LoginScreen from './assets/files/LoginScreen.js';
 
 export default function App() {
-
   
   const Stack = createNativeStackNavigator();
 
