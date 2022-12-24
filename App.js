@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import SplashScreen from './assets/files/SplashScreen.js';
 import LoginScreen from './assets/files/LoginScreen.js';
+import AddProductScreen from './assets/Screens/AddProductScreen';
 
 export default function App() {
 
@@ -24,6 +25,13 @@ export default function App() {
         <Stack.Screen 
           name="Login" 
           component={LoginScreen}
+          options={{
+            headerShown: false,
+          }}
+         />
+        <Stack.Screen 
+          name="Add Product" 
+          component={AddProductScreen}
           options={{
             headerShown: false,
           }}
