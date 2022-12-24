@@ -13,7 +13,7 @@ export default function App() {
 
   return (
       <NavigationContainer>
-      <Stack.Navigator initialRouteName="Splash">
+      <Stack.Navigator initialRouteName="Product">
         <Stack.Screen 
           name="Splash" 
           component={SplashScreen}
@@ -29,7 +29,7 @@ export default function App() {
           }}
          />
         <Stack.Screen 
-          name="Add Product" 
+          name="Product" 
           component={AddProductScreen}
           options={{
             headerShown: false,

@@ -128,6 +128,10 @@ function AddProductScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    maxWidth: 400,
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignSelf: 'center'
   },
   header: {
     marginVertical: 20,
@@ -148,7 +152,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   errorText: {
-    fontSize: 10,
+    fontSize: 16,
     color: color.danger,
   },
   buttonContainer: {
