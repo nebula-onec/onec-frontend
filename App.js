@@ -8,7 +8,6 @@ import LoginScreen from './assets/files/LoginScreen.js';
 import AddProductScreen from './assets/Screens/AddProductScreen';
 
 export default function App() {
-
   
   const Stack = createNativeStackNavigator();
 
