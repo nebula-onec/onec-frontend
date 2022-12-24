@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import SplashScreen from './assets/files/SplashScreen.js';
 import LoginScreen from './assets/files/LoginScreen.js';
-
+//a sduasd as djasdas jdjasd
 export default function App() {
 
   
