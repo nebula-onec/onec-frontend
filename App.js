@@ -6,9 +6,11 @@ import React, { createContext, useContext, useState } from 'react';
 import SplashScreen from './assets/files/SplashScreen.js';
 import LoginScreen from './assets/files/LoginScreen.js';
 import AddProductScreen from './assets/Screens/AddProductScreen';
+
 import HomeScrren from './assets/files/HomeScreen.js';
 import {tokenContext, AuthContextProvider} from './assets/files/myContext';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import ProductScreen from './assets/Screens/ProductScreen.js';
 
 
 export default function App() {
@@ -17,6 +19,7 @@ export default function App() {
   const {token, setToken} = useContext(tokenContext);
 
   return (
+
     <SafeAreaProvider>
       <SafeAreaView style={{flex: 1}}>
         <AuthContextProvider>
@@ -47,6 +50,13 @@ export default function App() {
                 name="Home" 
                 component={HomeScrren}
                 
+              />
+              <Stack.Screen 
+                name="ProductList" 
+                component={ProductScreen}
+                options={{
+                  headerShown: false,
+                }}
               />
             </Stack.Navigator>
           </NavigationContainer>
