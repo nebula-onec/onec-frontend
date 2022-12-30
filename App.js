@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import SplashScreen from './assets/files/SplashScreen.js';
 import LoginScreen from './assets/files/LoginScreen.js';
 import AddProductScreen from './assets/Screens/AddProductScreen';
+import ProductScreen from './assets/Screens/ProductScreen.js';
 
 export default function App() {
   
@@ -13,7 +14,7 @@ export default function App() {
 
   return (
       <NavigationContainer>
-      <Stack.Navigator initialRouteName="Product">
+      <Stack.Navigator initialRouteName="Product List">
         <Stack.Screen 
           name="Splash" 
           component={SplashScreen}
@@ -31,6 +32,13 @@ export default function App() {
         <Stack.Screen 
           name="Product" 
           component={AddProductScreen}
+          options={{
+            headerShown: false,
+          }}
+         />
+        <Stack.Screen 
+          name="Product List" 
+          component={ProductScreen}
           options={{
             headerShown: false,
           }}
