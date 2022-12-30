@@ -1,11 +1,16 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import { View, Text, SliderComponent, StyleSheet, Image } from 'react-native';
-//import logo from '../images/icon_150.png'
+import { tokenContext } from './myContext';
 
 export default function SplashScreen({ navigation }){
-    const [time, setTime] = useState(0);
+    const {token, setToken} = useContext(tokenContext);
+    
     useEffect(() => {
-        setTimeout( () => {navigation.replace("Login")}, 4000);
+        console.log(token);
+        if(token === "abc") 
+            setTimeout( () => {navigation.replace("Product")}, 2000);
+        else 
+            setTimeout( () => {navigation.replace("Login")}, 2000);
     }, []);
     
     return (

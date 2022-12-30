@@ -1,8 +1,9 @@
-import * as React from 'react';
+import React, { useContext, useEffect} from 'react';
 import { View, Text, StyleSheet, Image, TextInput, Button, TouchableOpacity} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { tokenContext } from './myContext';
 
-export default function SplashScreen(props){
+export default function SplashScreen({navigation}){
     
     return (
         <SafeAreaView style={st.container}>
@@ -19,10 +20,9 @@ export default function SplashScreen(props){
                   secureTextEntry={true}
                 />
                 <TouchableOpacity
-                style={st.button1} >
+                style={st.button1} onPress={() => {navigation.navigate("Product")}}>
                     <Text style={st.buttonText}>Submit</Text>
                 </TouchableOpacity>
-
             </View>
         </SafeAreaView>
     )
