@@ -16,7 +16,7 @@ import ProductScreen from './assets/Screens/ProductScreen.js';
 export default function App() {
   
   const Stack = createNativeStackNavigator();
-  const {token, setToken} = useContext(tokenContext);
+  const {token, setToken} = useContext(tokenContext); //s
 
   return (
 
