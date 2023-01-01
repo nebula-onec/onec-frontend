@@ -9,6 +9,19 @@ import {
 } from "react-native";
 
 const { width } = Dimensions.get("window");
+let col = 1;
+let flexDirection;
+if (width <= 500) {
+  col = 1;
+  flexDirection="row";
+} else {
+  col = parseInt(width / 250);
+  if (col > 4) {
+    col = 4;
+  }
+  flexDirection="column";
+}
+let container_width=parseInt(width/col);
 
 function ProductCard({ data }) {
   let { image, name, weight, price, avilable_qty } = data;
@@ -31,13 +44,20 @@ function ProductCard({ data }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     alignSelf: "center",
     backgroundColor: "white",
-    margin: 5,
+    margin: 10,
+    marginHorizontal:5,
     alignItems: "center",
-    flexDirection: "column",
-    padding:5
+    flexDirection: flexDirection,
+    padding:5,
+    borderRadius:15,
+    width:container_width-20,
+    shadowColor: "#000",
+    shadowOpacity: 0.80,
+    shadowRadius: 4,
+    elevation:10,
   },
   cardImage: {
     margin: 10,
@@ -59,7 +79,8 @@ const styles = StyleSheet.create({
   },
   cardName: {
     fontSize: 25,
-    fontWeight:"600"
+    fontWeight:"600",
+    
   },
   price:{
     fontWeight:"500"

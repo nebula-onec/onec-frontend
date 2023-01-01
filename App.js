@@ -24,7 +24,7 @@ export default function App() {
       <SafeAreaView style={{flex: 1}}>
         <AuthContextProvider>
           <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home">
+            <Stack.Navigator initialRouteName="ProductList">
               <Stack.Screen 
                 name="Splash" 
                 component={SplashScreen}
