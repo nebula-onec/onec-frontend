@@ -11,7 +11,7 @@ if(width<=500){
     col=1;
 }
 else{
-    col=width/250;
+    col= parseInt(width/250);
 }
 
 function ProductScreen(props) {
@@ -20,7 +20,7 @@ function ProductScreen(props) {
   return (
     <View style={styles.container}>
         <Image source={require("../images/icon_150.png")}></Image>
-      <FlatList
+      <FlatList contentContainerStyle={{flex:1, flexDirection: 'column'}}
         data={Data}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
