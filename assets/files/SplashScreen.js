@@ -10,7 +10,7 @@ export default function SplashScreen({ navigation }){
         if(token === "abc") 
             setTimeout( () => {navigation.replace("Product")}, 2000);
         else 
-            setTimeout( () => {navigation.replace("Login")}, 2000);
+            setTimeout( () => {navigation.replace("Home")}, 2000);
     }, []);
     
     return (
