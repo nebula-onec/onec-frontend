@@ -16,7 +16,6 @@ import BottomNavigator from "./assets/components/BottomNavigator.js";
 export default function App() {
   const Stack = createNativeStackNavigator();
   const { token, setToken } = useContext(tokenContext);
-
   return (
     <SafeAreaProvider>
       <SafeAreaView style={{ flex: 0.99}}>
@@ -51,7 +50,6 @@ export default function App() {
                   headerShown: false,
                 }}
               />
-              <Stack.Screen name="Homee" component={HomeScrren} />
               <Stack.Screen
                 name="ProductList"
                 component={ProductScreen}

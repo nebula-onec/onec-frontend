@@ -25,6 +25,7 @@ if (width <= 500) {
   if (col > 4) {
     col = 4;
   }
+
 }
 
 function ProductScreen(props) {
