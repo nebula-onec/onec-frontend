@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { AntDesign, Ionicons, Feather,  Entypo } from '@expo/vector-icons';
-import Values from '../Values';
+import Values from '../config/Values';
 import { ScrollView, Text, View, StyleSheet, PermissionsAndroid, Pressable} from "react-native";
 
 import data from './data'
