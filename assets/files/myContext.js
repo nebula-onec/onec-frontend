@@ -1,20 +1,28 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
+import BottomNavigator from "../components/BottomNavigator.js";
 
-export const tokenContext = createContext("");
+export const tokenContext = createContext();
 
 export const AuthContextProvider = ({children}) => {
-    const [token, setToken] = useState("");
+    const [token, setToken] = useState(null);
     
-    function login(prop){
-        setToken(prop);
+    function login(id, password){
+        //console.log(id);
+        //if(id == "surya")
+            setToken(id);
     }
+
+    useEffect(() => {
+        console.log(token)
+    }, [token]);
+
     function logout(){
-        setToken("");
+        setToken(null);
     }
 
     return (
         <tokenContext.Provider value={{login, logout, token, setToken}}>
-            {children}
+            {token ? <BottomNavigator /> : children}
         </tokenContext.Provider>
     )
 }

@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 
 function BottomNavigator(props) {
   return (
-    
+      <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen 
           options={{
@@ -33,7 +33,7 @@ function BottomNavigator(props) {
           }}
           name="Account" component={AccountScreen}/>
         </Tab.Navigator>
-      
+      </NavigationContainer>
   );
 }
 
