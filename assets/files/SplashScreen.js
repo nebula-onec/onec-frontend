@@ -3,14 +3,11 @@ import { View, Text, SliderComponent, StyleSheet, Image } from 'react-native';
 import { tokenContext } from './myContext';
 
 export default function SplashScreen({ navigation }){
-    const {token, setToken} = useContext(tokenContext);
+    const {token} = useContext(tokenContext);
     
     useEffect(() => {
-        console.log(token);
-        if(token === "abc") 
-            setTimeout( () => {navigation.replace("Product")}, 2000);
-        else 
-            setTimeout( () => {navigation.replace("Home")}, 2000);
+        console.log(token); 
+        setTimeout( () => {navigation.replace( token ? "Home" : "Login")}, 2);
     }, []);
     
     return (

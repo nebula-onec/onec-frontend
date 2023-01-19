@@ -1,10 +1,14 @@
-import React, { useContext, useEffect} from 'react';
+import React, { useContext, useEffect, useState} from 'react';
 import { View, Text, StyleSheet, Image, TextInput, Button, TouchableOpacity} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { tokenContext } from './myContext';
 
-export default function SplashScreen({navigation}){
-    
+export default function LoginScreen({navigation}){
+
+    const {token, setToken, login} = useContext(tokenContext);
+    const [id, setId] = useState("");
+    const [password, setPassword] = useState("");
+
     return (
         <SafeAreaView style={st.container}>
             <Image 
@@ -13,14 +17,15 @@ export default function SplashScreen({navigation}){
             source={require('../images/icon_150.png')}
             />
             <View style={st.container2}>
-                <Text style={st.welcome}>Welcome!</Text>
-                <TextInput placeholder='Email' style={st.inbox}/>
+                <Text style={st.welcome}>Welcome! {id}</Text>
+                <TextInput placeholder='Email' style={st.inbox} onChangeText={setId}/>
                 <TextInput placeholder='Password' style={st.inbox}
+                  onChangeText={setPassword}
                   textContentType={'password'}
                   secureTextEntry={true}
                 />
                 <TouchableOpacity
-                style={st.button1} onPress={() => {navigation.navigate("Product")}}>
+                style={st.button1} onPress={() => login(id, password)}>
                     <Text style={st.buttonText}>Submit</Text>
                 </TouchableOpacity>
             </View>

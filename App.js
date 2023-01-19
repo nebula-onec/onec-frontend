@@ -5,17 +5,13 @@ import React, { createContext, useContext, useState } from "react";
 
 import SplashScreen from "./assets/files/SplashScreen.js";
 import LoginScreen from "./assets/files/LoginScreen.js";
-import AddProductScreen from "./assets/Screens/AddProductScreen";
 
-import HomeScrren from "./assets/files/HomeScreen.js";
 import { tokenContext, AuthContextProvider } from "./assets/files/myContext";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import ProductScreen from "./assets/Screens/ProductScreen.js";
 import BottomNavigator from "./assets/components/BottomNavigator.js";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
-  const { token, setToken } = useContext(tokenContext);
   return (
     <SafeAreaProvider>
       <SafeAreaView style={{ flex: 0.99}}>
@@ -39,20 +35,6 @@ export default function App() {
               <Stack.Screen
                 name="Login"
                 component={LoginScreen}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="Product"
-                component={AddProductScreen}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="ProductList"
-                component={ProductScreen}
                 options={{
                   headerShown: false,
                 }}
