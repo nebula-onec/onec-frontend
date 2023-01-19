@@ -9,7 +9,6 @@ import {
   Modal,
   Text,
   Image,
-  ScrollView,
 } from "react-native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -25,8 +24,18 @@ if (width <= 500) {
   if (col > 4) {
     col = 4;
   }
-
 }
+
+
+const list_header = () => {
+  return (
+    <View style={styles.addProductButtonContainer}>
+      <TouchableOpacity style={styles.addProductButton}>
+        <Text style={{ fontSize: 20, color: "white" }}>Add New Product</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 function ProductScreen(props) {
   const [visible, setVisible] = useState(false);
@@ -135,30 +144,26 @@ function ProductScreen(props) {
         {/* Filter Part End */}
       </View>
 
-      <ScrollView showsVerticalScrollIndicator={false} disableScrollViewPanResponder={true}>
-        <TouchableOpacity style={styles.addProductButton}>
-          <Text style={{ fontSize: 20, color: "white" }}>Add New Product</Text>
-        </TouchableOpacity>
-
-        {data && (
-          <FlatList
-            contentContainerStyle={{
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-            data={data}
-            keyExtractor={(item) => item.id}
-            renderItem={renderItem}
-            numColumns={col}
-          />
-        )}
-        {data.length == 0 && (
-          <Image
-            style={styles.noData}
-            source={require("../images/no-search-item-found.gif")}
-          />
-        )}
-      </ScrollView>
+      {data && (
+        <FlatList
+          ListHeaderComponent={list_header}
+          ListHeaderComponentStyle={styles.addProductButtonContainer}
+          contentContainerStyle={{
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          data={data}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+          numColumns={col}
+        />
+      )}
+      {data.length == 0 && (
+        <Image
+          style={styles.noData}
+          source={require("../images/no-search-item-found.gif")}
+        />
+      )}
     </View>
   );
 }
@@ -166,7 +171,6 @@ function ProductScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginLeft: 10,
   },
   header: {
     height: 50,
@@ -220,15 +224,22 @@ const styles = StyleSheet.create({
     width: "90%",
     marginBottom: 10,
   },
+  addProductButtonContainer:{
+    flex:1,
+    flexDirection: "row-reverse",
+    color: '#fc6103',
+    width: '100%',
+    paddingHorizontal:16,
+  },
   addProductButton: {
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
     backgroundColor: "#4d90fe",
-    width: "50%",
     padding: 10,
-    borderRadius: 5,
-    marginVertical:7,
+    borderRadius: 10,
+    marginVertical: 7,
+    width: `${col == 1 ? '100%' : '200px'}`,
+    alignItems:"center",
+    alignSelf:"flex-end",
+    borderRadius: 24
   },
   sortName: {
     flex: 1,

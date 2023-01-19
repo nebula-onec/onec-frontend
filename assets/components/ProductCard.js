@@ -10,18 +10,20 @@ import {
 
 const { width } = Dimensions.get("window");
 let col = 1;
+let container_width;
 let flexDirection;
 if (width <= 500) {
   col = 1;
   flexDirection="row";
+  container_width=width-20;
 } else {
   col = parseInt(width / 250);
   if (col > 4) {
     col = 4;
   }
   flexDirection="column";
+  container_width=parseInt(width/col)-20;
 }
-let container_width=parseInt(width/col);
 
 function ProductCard({ data }) {
   let { image, name, weight, price, avilable_qty } = data;
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
     flexDirection: flexDirection,
     padding:5,
     borderRadius:15,
-    width:container_width-20,
+    width:container_width,
     shadowColor: "#000",
     shadowOpacity: 0.80,
     shadowRadius: 4,
