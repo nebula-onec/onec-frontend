@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
+import { Constants } from "expo-constants";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React, { createContext, useContext, useState } from "react";
 
@@ -12,9 +13,10 @@ import BottomNavigator from "./assets/components/BottomNavigator.js";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
+  //const plat = Constants.pla
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 0.99}}>
+      <SafeAreaView style={{ flex: 1}}>
         <AuthContextProvider>
           <NavigationContainer>
             <Stack.Navigator initialRouteName="Splash">

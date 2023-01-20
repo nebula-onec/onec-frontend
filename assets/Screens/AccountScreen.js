@@ -1,16 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
-  View,
-  StyleSheet,
-  Dimensions,
-  Image,
-  TouchableOpacity,
-  Text,
-  Alert,
-  Modal,
-} from "react-native";
+  View,  StyleSheet,  Dimensions,  Image,  TouchableOpacity,  Text,  Alert,  Modal,} from "react-native";
+
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Values from "../config/Values";
+
+import { tokenContext } from "../files/myContext";
 
 const { height, width } = Dimensions.get("window");
 
@@ -38,6 +33,9 @@ if (width > 500) {
 function AccountScreen(props) {
   const [userName, setUserName] = useState("Meet Patel");
   const [visible, setVisible] = useState(false);
+  
+  const {logout} = useContext(tokenContext);
+
   return (
     <View style={styles.outerContainer}>
       <View style={styles.profileDetailsContainer}>
@@ -53,9 +51,7 @@ function AccountScreen(props) {
       </View>
       <TouchableOpacity
         style={styles.logoutContainer}
-        onPress={() => {
-          setVisible(true);
-        }}
+        onPress={logout}
       >
         <Text>Logout</Text>
       </TouchableOpacity>

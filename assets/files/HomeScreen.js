@@ -11,7 +11,7 @@ export default function HomeScrren(props){
 
     return (
         <ScrollView contentContainerStyle={styles.homeContainer}>
-            <Pressable style={{flexGrow: 1}}>
+            <Pressable style={styles.pressableContainer}>
             <View style={styles.horizontal}>
                 <View style={styles.horizontal1}>
                     <Text style={styles.boxText}> {list[0]} </Text>
@@ -97,6 +97,9 @@ const styles = StyleSheet.create({
     homeContainer: {
         flexDirection: "column",
         flexGrow: 1,
+    },
+    pressableContainer: {
+        cursor: 'auto',
     },
     horizontal : {
         flexDirection: 'row',

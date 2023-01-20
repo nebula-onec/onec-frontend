@@ -12,8 +12,12 @@ const Tab = createBottomTabNavigator();
 
 function BottomNavigator(props) {
   return (
-      <NavigationContainer>
-        <Tab.Navigator>
+      <NavigationContainer independent={true}>
+        <Tab.Navigator
+          screenOptions={{
+            tabBarStyle: {overflow: 'hidden'},
+          }}
+        >
           <Tab.Screen 
           options={{
             headerShown: false,
@@ -36,9 +40,5 @@ function BottomNavigator(props) {
       </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  
-});
 
 export default BottomNavigator;
