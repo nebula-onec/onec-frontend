@@ -7,6 +7,7 @@ import HomeScrren from "../files/HomeScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import ProductScreen from "../Screens/ProductScreen";
 import AccountScreen from "../Screens/AccountScreen";
+import OrderScreen from "../Screens/OrderScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -36,6 +37,12 @@ function BottomNavigator(props) {
             tabBarIcon:({})=>(<MaterialCommunityIcons name="account" size={24} color="black" />)
           }}
           name="Account" component={AccountScreen}/>
+          <Tab.Screen 
+          options={{
+            headerShown: false,
+            tabBarIcon:({})=>(<MaterialCommunityIcons name="account" size={24} color="black" />)
+          }}
+          name="Orders" component={OrderScreen}/>
         </Tab.Navigator>
       </NavigationContainer>
   );
