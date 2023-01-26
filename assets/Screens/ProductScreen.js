@@ -26,7 +26,6 @@ if (width <= 500) {
   }
 }
 
-
 const list_header = () => {
   return (
     <View style={styles.addProductButtonContainer}>
@@ -81,7 +80,9 @@ function ProductScreen(props) {
           onPress={() => {
             setVisible(true);
           }}
+          activeOpacity={1}
         >
+          <Text style={{ paddingRight: 4 }}>Sort By</Text>
           <MaterialCommunityIcons name="sort-variant" size={25} />
         </TouchableOpacity>
         <Modal
@@ -187,12 +188,14 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 20,
     flexDirection: "row",
-    paddingLeft: 20,
+    paddingLeft: 28,
     paddingBottom: 10,
     alignItems: "center",
   },
   dropdown: {
-    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
+    marginHorizontal: 18,
   },
   model: {
     alignItems: "center",
@@ -204,6 +207,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.53,
     shadowRadius: 2.62,
     marginRight: 20,
+    marginTop: 12,
   },
   modelClose: {
     backgroundColor: "#4d90fe",
@@ -224,22 +228,22 @@ const styles = StyleSheet.create({
     width: "90%",
     marginBottom: 10,
   },
-  addProductButtonContainer:{
-    flex:1,
+  addProductButtonContainer: {
+    flex: 1,
     flexDirection: "row-reverse",
-    color: '#fc6103',
-    width: '100%',
-    paddingHorizontal:16,
+    color: "#fc6103",
+    width: "100%",
+    paddingHorizontal: 16,
   },
   addProductButton: {
     backgroundColor: "#4d90fe",
     padding: 10,
     borderRadius: 10,
     marginVertical: 7,
-    width: `${col == 1 ? '100%' : '200px'}`,
-    alignItems:"center",
-    alignSelf:"flex-end",
-    borderRadius: 24
+    width: `${col == 1 ? "100%" : "200px"}`,
+    alignItems: "center",
+    alignSelf: "flex-end",
+    borderRadius: 24,
   },
   sortName: {
     flex: 1,
