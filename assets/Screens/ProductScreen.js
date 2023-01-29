@@ -13,7 +13,7 @@ import {
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import ProductCard from "../components/ProductCard";
-import Data from "../Data";
+import {getDatas} from "../Data";
 
 const { width } = Dimensions.get("window");
 let col = 1;
@@ -36,11 +36,13 @@ const list_header = () => {
   );
 };
 
-function ProductScreen(props) {
+function ProductScreen({navigation, route}) {
+  console.log("ASD",route);
+  const Data=getDatas();
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState(Data);
   const [oldData, setOldData] = useState(Data);
-  const renderItem = ({ item }) => <ProductCard data={item} />;
+  const renderItem = ({ item }) => <ProductCard data={item} navigation={navigation}/>;
 
   const handleSearch = (text) => {
     const formattedQuery = text.toLowerCase();

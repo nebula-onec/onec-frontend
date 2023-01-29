@@ -7,6 +7,11 @@ import {
   Image,
   Dimensions,
 } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import ProductDetailsScreen from "../Screens/ProductDetailsScreen";
+import { createStackNavigator } from "@react-navigation/stack";
+
 
 const { width } = Dimensions.get("window");
 let col = 1;
@@ -25,11 +30,16 @@ if (width <= 500) {
   container_width = parseInt(width / col) - 20;
 }
 
-function ProductCard({ data }) {
-  let { image, name, weight, price, avilable_qty } = data;
+
+
+function ProductCard({ data, navigation, root }) {
+  let { image, name, weight, price, avilable_qty, id } = data;
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.cardImage}>
+      <TouchableOpacity
+        style={styles.cardImage}
+        onPress={() => navigation.navigate('ProductDetails', {itemId:id})}
+      >
         <Image style={styles.image} source={image} resizeMode="contain" />
       </TouchableOpacity>
       <View style={styles.productDetails}>
@@ -47,7 +57,8 @@ function ProductCard({ data }) {
             </View>
           </View>
           <View style={styles.avilableQtyContainer}>
-            <Text style={styles.quantity}>Available Qty: </Text> <Text>{avilable_qty}</Text>
+            <Text style={styles.quantity}>Available Qty: </Text>
+            <Text>{avilable_qty}</Text>
           </View>
         </View>
       </View>
@@ -95,20 +106,20 @@ const styles = StyleSheet.create({
   priceContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom:4,
+    marginBottom: 4,
   },
-  extraDetailsContainer:{
-    flexDirection:"row",
-    justifyContent:"space-between"
+  extraDetailsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   price: {
     fontWeight: "500",
     fontSize: 16,
     color: "#484848",
   },
-  avilableQtyContainer:{
-    flexDirection:"row",
-    marginTop:20
+  avilableQtyContainer: {
+    flexDirection: "row",
+    marginTop: 20,
   },
   quantity: {
     color: "#AC4646",

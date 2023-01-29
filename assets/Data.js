@@ -183,6 +183,11 @@ const Data= [
         price:"130",
         avilable_qty:"50",
     },
-]
+];
 
-export default Data;
+export function getDatas(){
+    return Data;
+}
+export function getData(id){
+    return Data.find((data)=> (data.id==id));
+}

@@ -1,13 +1,18 @@
 import React, {useEffect, useState} from "react";
 import { AntDesign, Ionicons, Feather,  Entypo } from '@expo/vector-icons';
 import Values from '../config/Values';
-import { ScrollView, Text, View, StyleSheet, PermissionsAndroid, Pressable} from "react-native";
+import { ScrollView, Text, View, StyleSheet, PermissionsAndroid, Pressable, TouchableOpacity} from "react-native";
 
 import data from './data'
 
-export default function HomeScrren(props){
+export default function HomeScrren({navigation}){
     var list = [1,2,3,4,5,6]
     let [low, sold] = [0, 0]
+
+    const move = ()=> {
+        // console.log(props)
+        navigation.navigate("ProductInfo", {itemid:12});
+    }
 
     return (
         <ScrollView contentContainerStyle={styles.homeContainer}>
@@ -26,9 +31,11 @@ export default function HomeScrren(props){
                     <Text style={styles.boxText}>Products</Text>
                 </View>
             </View>
-            <View style={styles.horizontal}>
-                <Text style={styles.sales_last_week}> Sales Last Week: <Text style={{fontSize:22}}>{"\n " + list[3]}</Text> </Text>
-            </View>
+            <TouchableOpacity style={styles.horizontal}>
+                <Text style={styles.sales_last_week} onPress={move}> 
+                    Sales Last Week: <Text style={{fontSize:22}}>{"\n " + list[3]}</Text> 
+                </Text>
+            </TouchableOpacity>
             <View style={styles.horizontal}>
                 <Text style={{...styles.sales_last_week, ...styles.product_summary}}>
                     <Text style={{fontSize: 22}}>{low + "\n"}</Text> Low Stock Products
@@ -65,6 +72,7 @@ function CurrentOrder(props){
         else col = '#029613'
         return col
     }
+    
     return (
         <View style={styles.current_order}>
             <View style={styles.current_order_v1}>
@@ -85,10 +93,10 @@ function CurrentOrder(props){
                     <Text style={{...styles.current_order_status, backgroundColor: getcolor()}}>status{props.status}</Text>
                 </View>
             </View>
-            <View style={styles.current_order_v1}>
-                <Text style={styles.order_v3_text}>More Details </Text>
+            <TouchableOpacity style={styles.current_order_v1}>
+                <Text style={styles.order_v3_text} >More Details </Text>
                 <AntDesign name="arrowright" size={22} color="black" />
-            </View>
+            </TouchableOpacity>
         </View>
     )
 }
