@@ -1,13 +1,26 @@
 import {useEffect, useState} from "react";
 import { ScrollView, Text, View, StyleSheet, PermissionsAndroid, Pressable, Image} from "react-native";
+import { AuthContextProvider } from "./myContext";
 
 export default function OrderDetails(props) {
 
     const [data, setData] = useState({});
     const [products, setProd] = useState([]);
     useEffect(()=> {
-        fetch("http://127.0.0.1:5000/order/12").then(res => res.json())
-        .then(res => setData(res))
+        fetch("http://192.168.0.105:8005/api/v1/admin/login", {
+            credentials: 'include',
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "email" : "adarshrawat.run@gmail.com",
+                "password": "12345678"
+            })
+        })
+        .then(res => res.json())
+        .then(res => console.log(res))
+        // .then(res => setData(res))
     }, [])
 
     const getProduct = (props, ind) => {
@@ -34,7 +47,9 @@ export default function OrderDetails(props) {
     }
     
     return (
-        <ScrollView>
+        <ScrollView style={styles.outerContainer}
+          contentContainerStyle={styles.innerContainer}
+        >
             <Text>Order Details</Text>
             <View>
                 <Text>Order Date: {data.date}</Text>
@@ -60,12 +75,20 @@ export default function OrderDetails(props) {
 }
 
 const styles = StyleSheet.create({
+    outerContainer: {
+      width: '100%',
+      flex: 1,  
+    },
+    innerContainer: {
+        maxWidth: 500,
+        marginHorizontal: 'auto',
+    },
     productContainer: {
         display: "flex",
         flexDirection: "row"
     },
     image: {
-        width: 200,
+        width: 150,
         height: 150,
     }
 })

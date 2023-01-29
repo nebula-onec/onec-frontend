@@ -1,5 +1,6 @@
 import React, {createContext, useEffect, useState} from 'react';
 import BottomNavigator from "../components/BottomNavigator.js";
+import LoginScreen from './LoginScreen.js';
 
 export const tokenContext = createContext();
 
@@ -22,7 +23,7 @@ export const AuthContextProvider = ({children}) => {
 
     return (
         <tokenContext.Provider value={{login, logout, token, setToken}}>
-            {token ? <BottomNavigator /> : children}
+            {token ? children : <LoginScreen />}
         </tokenContext.Provider>
     )
 }
