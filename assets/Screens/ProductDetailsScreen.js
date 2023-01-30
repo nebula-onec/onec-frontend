@@ -4,6 +4,7 @@ import { View, StyleSheet, Image} from 'react-native';
 import {getData} from '../Data';
 
 function ProductDetailsScreen({route,navigation}) {
+    console.log({navigation})
     const {itemId} = route.params;
     const productData=getData(itemId)
     console.log(productData);
@@ -15,7 +16,6 @@ function ProductDetailsScreen({route,navigation}) {
                 </View>
             </View>
             <View style={styles.lowerContainer}>
-
             </View>
         </View>
     );

@@ -2,10 +2,11 @@ import {useEffect, useState} from "react";
 import { ScrollView, Text, View, StyleSheet, PermissionsAndroid, Pressable, Image} from "react-native";
 import { AuthContextProvider } from "./myContext";
 
-export default function OrderDetails(props) {
+export default function OrderDetails({orderId}) {
 
     const [data, setData] = useState({});
     const [products, setProd] = useState([]);
+    
     useEffect(()=> {
         fetch("http://192.168.0.105:8005/api/v1/admin/login", {
             credentials: 'include',
@@ -23,9 +24,9 @@ export default function OrderDetails(props) {
         // .then(res => setData(res))
     }, [])
 
-    const getProduct = (props, ind) => {
+    const getProduct = (props, index) => {
         return (
-            <View style={styles.productContainer} key={ind}>
+            <View style={styles.productContainer} key={index}>
                 <View>
                 <Image
                     resizeMode='cover'
@@ -34,13 +35,13 @@ export default function OrderDetails(props) {
                     />
                 </View>
                 <View>
-                    <Text style={styles.prodcutHead}>{props.name}</Text>
-                    <Text>Product ID: {props.id}</Text>
-                    <Text>Selling Price: {props.price}</Text>
+                    <Text style={styles.prodcutHead}>Name...</Text>
+                    <Text>Product ID: {0}</Text>
+                    <Text>Selling Price: {0}</Text>
                 </View>
                 <View>
-                    <Text>Units Ordered: {props.count}</Text>
-                    <Text>Total: {props.count * props.price}</Text>
+                    <Text>Units Ordered: {0}</Text>
+                    <Text>Total: {0}</Text>
                 </View>
             </View>
         )

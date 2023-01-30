@@ -10,45 +10,15 @@ import {
 } from "react-native";
 import { AntDesign, Ionicons, Feather, Entypo } from "@expo/vector-icons";
 import Values from "../config/Values";
+import OrderCard from "../components/OrderCard";
 
 import data from "../files/data";
 
-function CurrentOrder({ data }) {
-  return (
-    <View style={styles.current_order}>
-      <View style={styles.orderCardHeader}>
-        <View>
-          <Text style={{ fontWeight: "bold", fontSize: 16 }}>
-            order: {data.orderID}
-          </Text>
-        </View>
-        <TouchableOpacity style={styles.moreDetailsContainer}>
-          <Text style={styles.order_v3_text}>More Details </Text>
-          <AntDesign name="arrowright" size={22} color="black" />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.orderInfoContainer}>
-        <View style={styles.orderDetails}>
-          <Ionicons name="person" size={22} color="black" />
-          <Text> {data.name}</Text>
-        </View>
-        <View style={styles.orderDetails}>
-          <Entypo name="phone" size={22} color="black" />
-          <Text> {data.phone}</Text>
-        </View>
-        <View style={styles.orderDetails}>
-          <Entypo name="clock" size={22} color="black" />
-          <Text style={{ marginLeft: 5 }}>Order-time: {data.time}</Text>
-        </View>
-      </View>
-    </View>
-  );
-}
-
-function OrderScreen(props) {
+function OrderScreen({navigation}) {
+  console.log(navigation)
   const [orderData, setOrderData] = useState(data);
   const [oldOrderData, setOldOrderData] = useState(data);
-  const renderItem = ({ item }) => <CurrentOrder data={item} />;
+  const renderItem = ({ item }) => <OrderCard {...item}/>;
 
   const handleSearch = (orderNo) => {
     let formattedQuery = orderNo.toString();

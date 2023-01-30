@@ -7,7 +7,7 @@ export default function SplashScreen({ navigation }){
     
     useEffect(() => {
         console.log(token); 
-        setTimeout( () => {navigation.replace( token ? "Home" : "Login")}, 2);
+        setTimeout( () => {navigation.replace( token ? "Main" : "Login")}, 2);
     }, []);
     
     return (

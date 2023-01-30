@@ -37,7 +37,7 @@ const list_header = () => {
 };
 
 function ProductScreen({navigation, route}) {
-  console.log("ASD",route);
+  console.log("ASD",navigation);
   const Data=getDatas();
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState(Data);

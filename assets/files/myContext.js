@@ -6,23 +6,42 @@ export const tokenContext = createContext();
 
 export const AuthContextProvider = ({children}) => {
     const [token, setToken] = useState(null);
+    const [rootStackRef, setRootStackRef] = useState(null);
     
-    function login(id, password){
-        //console.log(id);
-        //if(id == "surya")
-            setToken(id);
+    async function login(id, password){
+        let message;
+        return fetch("/api/v1/admin/login", {
+            credentials: 'include',
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "email" : id,
+                "password": password
+            })
+        })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res)
+            if(!res["success"])
+            message = res["message"]
+            else
+            setToken(123);
+            return message;
+        })
+        .catch(e => {
+            console.error(e)
+            setToken(123)
+        })
     }
-
-    useEffect(() => {
-        console.log(token)
-    }, [token]);
 
     function logout(){
         setToken(null);
     }
 
     return (
-        <tokenContext.Provider value={{login, logout, token, setToken}}>
+        <tokenContext.Provider value={{login, logout, token, setToken, rootStackRef, setRootStackRef}}>
             {token ? children : <LoginScreen />}
         </tokenContext.Provider>
     )

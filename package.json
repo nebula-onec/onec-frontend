@@ -2,6 +2,7 @@
   "name": "bazaar",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
+  "proxy": "http://192.168.0.105:8005",
   "scripts": {
     "start": "expo start,export NODE_OPTIONS=--openssl-legacy-provider && expo start",
     "android": "expo start --android",

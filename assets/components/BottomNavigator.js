@@ -13,7 +13,7 @@ const Tab = createBottomTabNavigator();
 
 function BottomNavigator(props) {
   return (
-    <NavigationContainer independent={true}>
+    // <NavigationContainer independent={true}>
       <Tab.Navigator
         screenOptions={{
           tabBarStyle: { overflow: "hidden" },
@@ -64,7 +64,7 @@ function BottomNavigator(props) {
           component={AccountScreen}
         />
       </Tab.Navigator>
-    </NavigationContainer>
+    // </NavigationContainer>
   );
 }
 

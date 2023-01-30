@@ -10,6 +10,8 @@ import LoginScreen from "./assets/files/LoginScreen.js";
 import { tokenContext, AuthContextProvider } from "./assets/files/myContext";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import BottomNavigator from "./assets/components/BottomNavigator.js";
+import ProductDetailsScreen from './assets/Screens/ProductDetailsScreen'
+import OrderDetails from "./assets/files/OrderDetails.js";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -28,7 +30,7 @@ export default function App() {
                 }}
               />
               <Stack.Screen
-                name="Home"
+                name="Main"
                 component={BottomNavigator}
                 options={{
                   headerShown: false,
@@ -40,6 +42,14 @@ export default function App() {
                 options={{
                   headerShown: false,
                 }}
+              />
+              <Stack.Screen
+                name="ProductDetails"
+                component={ProductDetailsScreen}
+              />
+              <Stack.Screen
+                name="OrderDetails"
+                component={OrderDetails}
               />
             </Stack.Navigator>
           </NavigationContainer>

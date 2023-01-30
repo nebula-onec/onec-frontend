@@ -8,6 +8,7 @@ export default function LoginScreen({navigation}){
     const {token, setToken, login} = useContext(tokenContext);
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("Welcome!");
 
     return (
         <SafeAreaView style={st.container}>
@@ -17,7 +18,7 @@ export default function LoginScreen({navigation}){
             source={require('../images/icon_150.png')}
             />
             <View style={st.container2}>
-                <Text style={st.welcome}>Welcome! {id}</Text>
+                <Text style={st.welcome}>{message}</Text>
                 <TextInput placeholder='Email' style={st.inbox} onChangeText={setId}/>
                 <TextInput placeholder='Password' style={st.inbox}
                   onChangeText={setPassword}
@@ -25,7 +26,7 @@ export default function LoginScreen({navigation}){
                   secureTextEntry={true}
                 />
                 <TouchableOpacity
-                style={st.button1} onPress={() => login(id, password)}>
+                style={st.button1} onPress={() => login(id, password).then(res=> setMessage(res))}>
                     <Text style={st.buttonText}>Submit</Text>
                 </TouchableOpacity>
             </View>
