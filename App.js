@@ -8,7 +8,7 @@ import SplashScreen from "./assets/files/SplashScreen.js";
 import LoginScreen from "./assets/files/LoginScreen.js";
 
 import { tokenContext, AuthContextProvider } from "./assets/files/myContext";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { initialWindowMetrics, SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import BottomNavigator from "./assets/components/BottomNavigator.js";
 import ProductDetailsScreen from './assets/Screens/ProductDetailsScreen'
 import OrderDetails from "./assets/files/OrderDetails.js";
@@ -18,7 +18,7 @@ export default function App() {
   //const plat = Constants.pla
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 1}}>
+      <SafeAreaView style={{ flex: 1}} forceInset={{top: 'never'}}>
         <AuthContextProvider>
           <NavigationContainer>
             <Stack.Navigator initialRouteName="Splash">
@@ -46,10 +46,14 @@ export default function App() {
               <Stack.Screen
                 name="ProductDetails"
                 component={ProductDetailsScreen}
+                status
               />
               <Stack.Screen
                 name="OrderDetails"
                 component={OrderDetails}
+                options={{
+                  statusBarHeight: 0,
+                }}
               />
             </Stack.Navigator>
           </NavigationContainer>
