@@ -1,18 +1,18 @@
-const orderById = {
+export const orderById = {
     orderID: 123456,
-    orderDate: new Date(2023, 1, 31),
-    CustomerName: "Raghav Dixit",
-    Phone: "512451278",
-    Address: {
+    orderDate: new Date(2023, 1, 31).toLocaleString(),
+    customerName: "Raghav Dixit",
+    phone: "512451278",
+    address: {
         0 : "Makaan no. 9254",
         1: "2nd Floor, Do Wan Hung Bhawan",
         2: "Manit, Bhopal",
         pincode: "462003"
     },
 
-    OrderSummary: {
+    summary: {
         grand_total: "6969",
-        shipping_cost: "40"
+        shipping_cost: "40",
     },
     
     products: [
