@@ -2,26 +2,13 @@ import {useEffect, useState} from "react";
 import { ScrollView, Text, View, StyleSheet, PermissionsAndroid, Pressable, Image} from "react-native";
 import { AuthContextProvider } from "./myContext";
 
-export default function OrderDetails({orderId}) {
+export default function OrderDetails({route}) {
 
     const [data, setData] = useState({});
     const [products, setProd] = useState([]);
     
     useEffect(()=> {
-        fetch("http://192.168.0.105:8005/api/v1/admin/login", {
-            credentials: 'include',
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                "email" : "adarshrawat.run@gmail.com",
-                "password": "12345678"
-            })
-        })
-        .then(res => res.json())
-        .then(res => console.log(res))
-        // .then(res => setData(res))
+        console.log(route.params.orderID)
     }, [])
 
     const getProduct = (props, index) => {
