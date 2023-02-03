@@ -1,7 +1,7 @@
 const Data= [
     {
         id:1,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Garlic",
         weight:"200gm",
         price:"2450",
@@ -9,7 +9,7 @@ const Data= [
     },
     {
         id:2,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Apple",
         weight:"200gm",
         price:"120",
@@ -17,7 +17,7 @@ const Data= [
     },
     {
         id:3,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Banana",
         weight:"200gm",
         price:"650",
@@ -25,7 +25,7 @@ const Data= [
     },
     {
         id:4,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Graps",
         weight:"200gm",
         price:"2034",
@@ -33,7 +33,7 @@ const Data= [
     },
     {
         id:5,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"mango",
         weight:"200gm",
         price:"2012",
@@ -41,7 +41,7 @@ const Data= [
     },
     {
         id:6,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Brush",
         weight:"200gm",
         price:"200",
@@ -49,7 +49,7 @@ const Data= [
     },
     {
         id:7,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Dairy milk",
         weight:"200gm",
         price:"205",
@@ -57,7 +57,7 @@ const Data= [
     },
     {
         id:8,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"5 Star",
         weight:"200gm",
         price:"209",
@@ -65,7 +65,7 @@ const Data= [
     },
     {
         id:9,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Peark",
         weight:"200gm",
         price:"970",
@@ -73,7 +73,7 @@ const Data= [
     },
     {
         id:10,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Munch",
         weight:"200gm",
         price:"228",
@@ -81,7 +81,7 @@ const Data= [
     },
     {
         id:11,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Pen",
         weight:"200gm",
         price:"436",
@@ -89,7 +89,7 @@ const Data= [
     },
     {
         id:12,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Pencil",
         weight:"200gm",
         price:"260",
@@ -97,7 +97,7 @@ const Data= [
     },
     {
         id:13,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Eraser",
         weight:"200gm",
         price:"900",
@@ -105,7 +105,7 @@ const Data= [
     },
     {
         id:14,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Speaker",
         weight:"200gm",
         price:"89",
@@ -113,7 +113,7 @@ const Data= [
     },
     {
         id:15,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"KeyBoard",
         weight:"200gm",
         price:"78",
@@ -121,7 +121,7 @@ const Data= [
     },
     {
         id:16,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Notebook",
         weight:"200gm",
         price:"45",
@@ -129,7 +129,7 @@ const Data= [
     },
     {
         id:17,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Glasses",
         weight:"200gm",
         price:"123",
@@ -137,7 +137,7 @@ const Data= [
     },
     {
         id:18,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Charger",
         weight:"200gm",
         price:"434",
@@ -145,7 +145,7 @@ const Data= [
     },
     {
         id:19,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Power Bank",
         weight:"200gm",
         price:"222",
@@ -153,7 +153,7 @@ const Data= [
     },
     {
         id:20,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Mobile",
         weight:"200gm",
         price:"2",
@@ -161,7 +161,7 @@ const Data= [
     },
     {
         id:21,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"SimCard",
         weight:"200gm",
         price:"2023",
@@ -169,7 +169,7 @@ const Data= [
     },
     {
         id:22,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Moniter",
         weight:"200gm",
         price:"200",
@@ -177,7 +177,7 @@ const Data= [
     },
     {
         id:23,
-        image:require("./images/icon_150.png"),
+        image:[{imageId:0,image:require("./images/garlic.png")},{imageId:1,image:require("./images/icon_150.png")},{imageId:2,image:require("./images/garlic.png")},{imageId:3,image:require("./images/icon_150.png")}],
         name:"Laptop",
         weight:"200gm",
         price:"130",
