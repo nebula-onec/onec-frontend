@@ -6,44 +6,51 @@ import {
   Text,
   Image,
   Dimensions,
+  useWindowDimensions
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProductDetailsScreen from "../Screens/ProductDetailsScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 
-const { width } = Dimensions.get("window");
-let col = 1;
-let container_width;
-let flexDirection;
-if (width <= 500) {
-  col = 1;
-  flexDirection = "row";
-  container_width = width - 20;
-} else {
-  col = parseInt(width / 250);
-  if (col > 4) {
-    col = 4;
-  }
-  flexDirection = "column";
-  container_width = parseInt(width / col) - 20;
-}
 
 function ProductCard({ data, navigation, root }) {
+  const { width } = useWindowDimensions();
+  let col=1,container_width,flexDirection,extraDetailsContainerDirection,alignName,imageWidth,imageHeight;
+  if (width <= 500) {
+    col = 1;
+    flexDirection = "row";
+    container_width = width - 20;
+    extraDetailsContainerDirection="column";
+    alignName = "flex-start";
+    imageWidth = 75;
+    imageHeight = 50;
+  } else {
+    col = parseInt(width / 250);
+    if (col > 4) {
+      col = 4;
+    }
+    flexDirection = "column";
+    container_width = parseInt(width / col) - 20;
+    extraDetailsContainerDirection="row";
+    alignName = "center";
+    imageWidth = 150;
+    imageHeight = 100;
+  }
   let { image, name, weight, price, avilable_qty, id } = data;
   return (
     <TouchableOpacity
-      style={styles.container}
+      style={[styles.container,{width: container_width,flexDirection:flexDirection}]}
       onPress={() => navigation.navigate("ProductDetails", { itemId: id })}
     >
       <View style={styles.cardImage}>
-        <Image style={styles.image} source={image[0].image} resizeMode="contain" />
+        <Image style={[styles.image,{width:imageWidth, height:imageHeight}]} source={image[0].image} resizeMode="cover" />
       </View>
       <View style={styles.productDetails}>
-        <View style={styles.nameCntainer}>
+        <View style={[styles.nameCntainer,{alignSelf: alignName}]}>
           <Text style={styles.cardName}>{name}</Text>
         </View>
-        <View style={styles.extraDetailsContainer}>
+        <View style={[styles.extraDetailsContainer,{flexDirection:extraDetailsContainerDirection}]}>
           <View>
             <View style={styles.priceContainer}>
               <Text style={styles.price}>Price : </Text>
@@ -65,35 +72,31 @@ function ProductCard({ data, navigation, root }) {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     alignSelf: "center",
     backgroundColor: "white",
     margin: 12,
     marginHorizontal: 5,
     alignItems: "center",
-    flexDirection: flexDirection,
     padding: 8,
-    width: container_width,
+    
   },
   cardImage: {
-    margin: 10,
+    margin: 8,
     paddingLeft: 15,
     paddingRight: 15,
     paddingTop: 30,
     paddingBottom: 30,
   },
   image: {
-    width: 150,
-    height: 100,
     alignSelf: "center",
   },
   productDetails: {
     flex: 1,
     width: "100%",
+    flexWrap:"wrap"
   },
   nameCntainer: {
     margin: 5,
-    alignSelf: "center",
   },
   cardName: {
     fontSize: 25,
@@ -106,7 +109,6 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   extraDetailsContainer: {
-    flexDirection: "row",
     justifyContent: "space-between",
   },
   price: {

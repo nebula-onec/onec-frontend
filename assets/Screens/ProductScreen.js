@@ -174,6 +174,7 @@ function ProductScreen({navigation, route}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginHorizontal:3,
   },
   header: {
     height: 50,
