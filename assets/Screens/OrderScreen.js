@@ -15,7 +15,6 @@ import OrderCard from "../components/OrderCard";
 import data from "../files/data";
 
 function OrderScreen({navigation}) {
-  console.log(navigation)
   const [orderData, setOrderData] = useState(data);
   const [oldOrderData, setOldOrderData] = useState(data);
   const renderItem = ({ item }) => <OrderCard {...item}/>;

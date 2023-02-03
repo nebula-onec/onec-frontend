@@ -23,7 +23,6 @@ export const AuthContextProvider = ({children}) => {
         })
         .then(res => res.json())
         .then(res => {
-            console.log(res)
             if(!res["success"])
             message = res["message"]
             else
