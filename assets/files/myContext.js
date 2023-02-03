@@ -1,6 +1,7 @@
 import React, {createContext, useEffect, useState} from 'react';
 import BottomNavigator from "../components/BottomNavigator.js";
 import LoginScreen from './LoginScreen.js';
+import OrderDetails from './OrderDetails.js';
 
 export const tokenContext = createContext();
 
@@ -41,7 +42,7 @@ export const AuthContextProvider = ({children}) => {
 
     return (
         <tokenContext.Provider value={{login, logout, token, setToken, rootStackRef, setRootStackRef}}>
-            {token ? children : <LoginScreen />}
+            {token ? children : <OrderDetails />}
         </tokenContext.Provider>
     )
 }

@@ -25,6 +25,22 @@ export const orderById = {
             total_for_this_product: "46"
         },
         {
+            id: "123456",
+            price: "23",
+            quantity: 2,
+            product_image_url: "",
+            product_name: "Murga Brand Shilajit",
+            total_for_this_product: "46"
+        },
+        {
+            id: "123456",
+            price: "23",
+            quantity: 2,
+            product_image_url: "",
+            product_name: "Murga Brand Shilajit",
+            total_for_this_product: "46"
+        },
+        {
             id: "123457",
             price: "24",
             quantity: 1,

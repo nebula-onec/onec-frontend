@@ -1,7 +1,7 @@
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { AntDesign, Ionicons, Feather,  Entypo } from '@expo/vector-icons';
 
-import Values from '../config/Values';
+import Values from '../config/values';
 import { useNavigation } from "@react-navigation/native";
 
 export default function OrderCard(props){
@@ -36,7 +36,7 @@ export default function OrderCard(props){
                     <Text style={{...styles.current_order_status, backgroundColor: getcolor()}}>status{props.status}</Text>
                 </View>
             </View>
-            <TouchableOpacity style={styles.current_order_v1} onPress={ () => navigation.navigate("OrderDetails", {orderID:props.orderID}) }>
+            <TouchableOpacity style={styles.current_order_v1} onPress={ () => navigation.navigate("Order Details", {orderID:props.orderID}) }>
                 <Text style={styles.order_v3_text} >More Details </Text>
                 <AntDesign name="arrowright" size={22} color="black" />
             </TouchableOpacity>

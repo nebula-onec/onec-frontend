@@ -3,7 +3,7 @@ import {
   View,  StyleSheet,  Dimensions,  Image,  TouchableOpacity,  Text,  Alert,  Modal,} from "react-native";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Values from "../config/Values";
+import Values from "../config/values";
 
 import { tokenContext } from "../files/myContext";
 

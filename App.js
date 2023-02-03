@@ -49,7 +49,7 @@ export default function App() {
                 status
               />
               <Stack.Screen
-                name="OrderDetails"
+                name="Order Details"
                 component={OrderDetails}
                 options={{
                   statusBarHeight: 0,
