@@ -12,7 +12,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProductDetailsScreen from "../Screens/ProductDetailsScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 
-
 const { width } = Dimensions.get("window");
 let col = 1;
 let container_width;
@@ -30,18 +29,16 @@ if (width <= 500) {
   container_width = parseInt(width / col) - 20;
 }
 
-
-
 function ProductCard({ data, navigation, root }) {
   let { image, name, weight, price, avilable_qty, id } = data;
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.cardImage}
-        onPress={() => navigation.navigate('ProductDetails', {itemId:id})}
-      >
-        <Image style={styles.image} source={image} resizeMode="contain" />
-      </TouchableOpacity>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigation.navigate("ProductDetails", { itemId: id })}
+    >
+      <View style={styles.cardImage}>
+        <Image style={styles.image} source={image[0].image} resizeMode="contain" />
+      </View>
       <View style={styles.productDetails}>
         <View style={styles.nameCntainer}>
           <Text style={styles.cardName}>{name}</Text>
@@ -62,7 +59,7 @@ function ProductCard({ data, navigation, root }) {
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
