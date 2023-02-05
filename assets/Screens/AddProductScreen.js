@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, Button, Alert } from "react-native";
 import { Input } from "reactstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import Values from "../config/Values";
+import values from "../config/values";
 
 const formValidationSchema = Yup.object().shape({
   productname: Yup.string()
@@ -33,18 +33,18 @@ function AddProductScreen(props) {
             images: null,
           }}
           validationSchema={formValidationSchema}
-          onSubmit={(values,formikAction) => {
+          onSubmit={(values_n,formikAction) => {
             setTimeout(()=>{
               alert("Submitted!");
               formikAction.resetForm();
-              Alert(JSON.stringify(values, null, 2));
+              Alert(JSON.stringify(values_n, null, 2));
             },2000);
           }}
         >
           {({
             handleChange,
             handleSubmit,
-            values,
+            values_n,
             setFieldValue,
             errors,
             touched,
@@ -55,7 +55,7 @@ function AddProductScreen(props) {
                 name="productname"
                 style={styles.inputField}
                 placeholder="Product Name"
-                value={values.productname}
+                value={values_n.productname}
                 onChange={handleChange("productname")}
                 onBlur={handleBlur("productname")}
               />
@@ -66,7 +66,7 @@ function AddProductScreen(props) {
                 name="price"
                 style={styles.inputField}
                 placeholder="Price"
-                value={values.price}
+                value={values_n.price}
                 onChange={handleChange("price")}
                 onBlur={handleBlur("price")}
               />
@@ -77,7 +77,7 @@ function AddProductScreen(props) {
                 name="avlStock"
                 style={styles.inputField}
                 placeholder="Aviable stock"
-                value={values.avlStock}
+                value={values_n.avlStock}
                 onChange={handleChange("avlStock")}
                 onBlur={handleBlur("avlStock")}
               />
@@ -88,7 +88,7 @@ function AddProductScreen(props) {
                 name="srtDes"
                 style={styles.inputField}
                 placeholder="Short Description"
-                value={values.srtDes}
+                value={values_n.srtDes}
                 onChange={handleChange("srtDes")}
                 onBlur={handleBlur("srtDes")}
               />
@@ -99,7 +99,7 @@ function AddProductScreen(props) {
                 name="lngDes"
                 style={styles.inputField}
                 placeholder="Long Description"
-                value={values.lngDes}
+                value={values_n.lngDes}
                 onChange={handleChange("lngDes")}
                 onBlur={handleBlur("lngDes")}
               />
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   inputField: {
     height: 40,
     marginVertical: 15,
-    backgroundColor: Values.white,
+    backgroundColor: values.white,
     borderRadius: 8,
     justifyContent: "center",
     padding: 5,
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 16,
-    color: Values.red,
+    color: values.red,
   },
   buttonContainer: {
     width: 80,

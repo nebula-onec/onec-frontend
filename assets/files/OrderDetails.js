@@ -20,21 +20,25 @@ export default function OrderDetails({route}) {
         },
         products: []
     });
-    const [products, setProd] = useState([]);
     
     useEffect(()=> {
         console.log(route?.params.orderID)
-        // http://192.168.0.106:8005/api/v1/admin/order/
-        let url = "";
-        fetch(url + route?.params.orderID, {
+        
+        
+        let url = "http://192.168.0.106:8005/api/v1/admin/order/" + ( route?.params.orderID ? route?.params.orderID : '4');
+        fetch(url, {
             credentials: 'include',
         })
         .then(res => res.json())
         .then(res => {
             console.log(res)
-            if(res.success)
-            setData(res.order)
-            else throw error
+            if(res.success){
+                setData(res.order)
+                console.log(res.order)
+            }
+            else {
+                console.log('eroor')
+            }
         })
         .catch(e => {
             console.error(e)
@@ -53,11 +57,11 @@ export default function OrderDetails({route}) {
                         />
                 </View>
                 <View style={{flex: 1}}>
-                    <Text style={styles.prodcutHead}>Name...asdk dkjad dasd askd kadkasd</Text>
-                    <Text style={styles.field}>Product ID: <Text style={styles.value}></Text></Text>
-                    <Text style={styles.field}>Selling Price: <Text style={styles.value}></Text></Text>
-                    <Text style={styles.field}>Units Ordered: <Text style={styles.value}></Text></Text>
-                    <Text style={styles.field}>Total: <Text style={styles.value}></Text></Text>
+                    <Text style={styles.prodcutHead}>Name: <Text style={styles.value}>{props.name}</Text></Text>
+                    <Text style={styles.field}>Product ID: <Text style={styles.value}>{props.product_id}</Text></Text>
+                    <Text style={styles.field}>Selling Price: <Text style={styles.value}>{props.price}</Text></Text>
+                    <Text style={styles.field}>Units Ordered: <Text style={styles.value}>{props.quantity}</Text></Text>
+                    <Text style={styles.field}>Total: <Text style={styles.value}> {props.total_price}</Text></Text>
                 </View>
             </View>
         )
@@ -70,11 +74,11 @@ export default function OrderDetails({route}) {
             <Text>Order Details</Text>
             <View style={{marginVertical: 16}}>
                 <Text style={styles.heading}>Order ID: {data.orderID}</Text>
-                <Text style={styles.field}>Date: <Text style={styles.value}>{data.orderDate}</Text></Text>
+                <Text style={styles.field}>Date: <Text style={styles.value}>{data.order_date}</Text></Text>
             </View>
             <View style={{marginTop: 16, marginBottom: 16, paddingBottom: 16, borderBottomColor: '#d9d9d9', borderBottomWidth: 1,}}>
-                <Text style={styles.field}>Ordered By: <Text style={styles.value}>{data.customerName}</Text></Text>
-                <Text style={{...styles.field, paddingBottom: 8}}>Phone: <Text style={styles.value}>{ data.phone}</Text></Text>
+                <Text style={styles.field}>Ordered By: <Text style={styles.value}>{data.user?.name}</Text></Text>
+                <Text style={{...styles.field, paddingBottom: 8}}>Phone: <Text style={styles.value}>{ data.user?.phone}</Text></Text>
                 <Text style={styles.field}>Address: <Text style={styles.value}>{ "\n" + data.address[0] + "\n" + data.address[1] + "\n" + data.address[2] + "\n" + data.address.pincode}</Text></Text>
             </View>
             <View style={ width > 700 ? styles.productListContainerDesktop : styles.productListContainerMobile}>
