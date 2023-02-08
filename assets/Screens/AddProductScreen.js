@@ -44,7 +44,7 @@ function AddProductScreen(props) {
           {({
             handleChange,
             handleSubmit,
-            values_n,
+            values,
             setFieldValue,
             errors,
             touched,
@@ -55,7 +55,7 @@ function AddProductScreen(props) {
                 name="productname"
                 style={styles.inputField}
                 placeholder="Product Name"
-                value={values_n.productname}
+                value={values.productname}
                 onChange={handleChange("productname")}
                 onBlur={handleBlur("productname")}
               />
@@ -66,7 +66,7 @@ function AddProductScreen(props) {
                 name="price"
                 style={styles.inputField}
                 placeholder="Price"
-                value={values_n.price}
+                value={values.price}
                 onChange={handleChange("price")}
                 onBlur={handleBlur("price")}
               />
@@ -77,7 +77,7 @@ function AddProductScreen(props) {
                 name="avlStock"
                 style={styles.inputField}
                 placeholder="Aviable stock"
-                value={values_n.avlStock}
+                value={values.avlStock}
                 onChange={handleChange("avlStock")}
                 onBlur={handleBlur("avlStock")}
               />
@@ -88,7 +88,7 @@ function AddProductScreen(props) {
                 name="srtDes"
                 style={styles.inputField}
                 placeholder="Short Description"
-                value={values_n.srtDes}
+                value={values.srtDes}
                 onChange={handleChange("srtDes")}
                 onBlur={handleBlur("srtDes")}
               />
@@ -99,7 +99,7 @@ function AddProductScreen(props) {
                 name="lngDes"
                 style={styles.inputField}
                 placeholder="Long Description"
-                value={values_n.lngDes}
+                value={values.lngDes}
                 onChange={handleChange("lngDes")}
                 onBlur={handleBlur("lngDes")}
               />
