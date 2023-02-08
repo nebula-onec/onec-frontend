@@ -12,6 +12,7 @@ import { initialWindowMetrics, SafeAreaProvider, SafeAreaView } from "react-nati
 import BottomNavigator from "./assets/components/BottomNavigator.js";
 import ProductDetailsScreen from './assets/Screens/ProductDetailsScreen';
 import OrderDetails from "./assets/files/OrderDetails.js";
+import AddOProductScreen from "./assets/Screens/AddProductScreen"
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -51,6 +52,13 @@ export default function App() {
               <Stack.Screen
                 name="Order Details"
                 component={OrderDetails}
+                options={{
+                  statusBarHeight: 0,
+                }}
+              />
+              <Stack.Screen
+                name="Add Product"
+                component={AddOProductScreen}
                 options={{
                   statusBarHeight: 0,
                 }}

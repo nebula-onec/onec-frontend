@@ -1,11 +1,13 @@
 import {useEffect, useState} from "react";
-import { ScrollView, Text, View, StyleSheet, PermissionsAndroid, Pressable, Image, useWindowDimensions} from "react-native";
+import { ScrollView, Text, View, StyleSheet, PermissionsAndroid, Pressable, Image, useWindowDimensions, TouchableOpacity} from "react-native";
 import { AuthContextProvider } from "./myContext";
 import { orderById } from "./orderById";
 import Values from "../config/Values";
+import { useNavigation } from "@react-navigation/native";
 
 export default function OrderDetails({route}) {
     const {width, height} = useWindowDimensions();
+    const navigation = useNavigation();
     const [data, setData] = useState({
         orderID: "",
         orderDate: "",
@@ -25,7 +27,7 @@ export default function OrderDetails({route}) {
         console.log(route?.params.orderID)
         
         
-        let url = "http://192.168.0.106:8005/api/v1/admin/order/" + ( route?.params.orderID ? route?.params.orderID : '4');
+        let url = "http://192.168.0.107:8005/api/v1/admin/order/" + ( route?.params.orderID ? route?.params.orderID : '4');
         fetch(url, {
             credentials: 'include',
         })
@@ -34,10 +36,9 @@ export default function OrderDetails({route}) {
             console.log(res)
             if(res.success){
                 setData(res.order)
-                console.log(res.order)
             }
             else {
-                console.log('eroor')
+                console.log('error in orderDetails fetch request')
             }
         })
         .catch(e => {
@@ -48,7 +49,10 @@ export default function OrderDetails({route}) {
 
     const Product = (props, index) => {
         return (
-            <View style={ width > 700 ? styles.productContainerDesktop : styles.productContainerMobile} key={index}>
+            <TouchableOpacity 
+                onPress={() => navigation.navigate("ProductDetails", {itemId:props.product_id})}
+                style={ width > 700 ? styles.productContainerDesktop : styles.productContainerMobile} 
+                key={index}>
                 <View style={styles.imageContainer}>
                     <Image
                         resizeMode='cover'
@@ -63,7 +67,7 @@ export default function OrderDetails({route}) {
                     <Text style={styles.field}>Units Ordered: <Text style={styles.value}>{props.quantity}</Text></Text>
                     <Text style={styles.field}>Total: <Text style={styles.value}> {props.total_price}</Text></Text>
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
     
