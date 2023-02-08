@@ -14,6 +14,7 @@ import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import ProductCard from "../components/ProductCard";
 import {getDatas} from "../Data";
+import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
 let col = 1;
@@ -26,23 +27,22 @@ if (width <= 500) {
   }
 }
 
-const list_header = () => {
-  return (
-    <View style={styles.addProductButtonContainer}>
-      <TouchableOpacity style={styles.addProductButton}>
-        <Text style={{ fontSize: 20, color: "white" }}>Add New Product</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
-
 function ProductScreen({navigation, route}) {
-  console.log("ASD",navigation);
   const Data=getDatas();
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState(Data);
   const [oldData, setOldData] = useState(Data);
   const renderItem = ({ item }) => <ProductCard data={item} navigation={navigation}/>;
+
+  const list_header = () => {
+    return (
+      <View style={styles.addProductButtonContainer}>
+        <TouchableOpacity style={styles.addProductButton} onPress={() => navigation.navigate("Add Product")}>
+          <Text style={{ fontSize: 20, color: "white" }}>Add New Product</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
 
   const handleSearch = (text) => {
     const formattedQuery = text.toLowerCase();

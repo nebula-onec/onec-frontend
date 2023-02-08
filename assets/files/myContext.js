@@ -42,7 +42,7 @@ export const AuthContextProvider = ({children}) => {
 
     return (
         <tokenContext.Provider value={{login, logout, token, setToken, rootStackRef, setRootStackRef}}>
-            {token ? children : <OrderDetails />}
+            {token ? children : <LoginScreen />}
         </tokenContext.Provider>
     )
 }
