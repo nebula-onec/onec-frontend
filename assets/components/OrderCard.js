@@ -1,7 +1,7 @@
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { AntDesign, Ionicons, Feather,  Entypo } from '@expo/vector-icons';
 
-import Values from '../config/values';
+import Values from '../config/Values';
 import { useNavigation } from "@react-navigation/native";
 
 export default function OrderCard(props){

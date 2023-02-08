@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import { ScrollView, Text, View, StyleSheet, PermissionsAndroid, Pressable, Image, useWindowDimensions} from "react-native";
 import { AuthContextProvider } from "./myContext";
 import { orderById } from "./orderById";
-import values from "../config/values";
+import Values from "../config/Values";
 
 export default function OrderDetails({route}) {
     const {width, height} = useWindowDimensions();
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     outerContainer: {
       width: '100%',
       flex: 1,  
-      backgroundColor: values.white,
+      backgroundColor: Values.white,
     },
     innerContainer: {
         width: '100%',
@@ -142,14 +142,14 @@ const styles = StyleSheet.create({
     imageContainer: {
     },
     heading: {
-        fontSize: values.fontLarge,
+        fontSize: Values.fontLarge,
     },
     field: {
         color: 'grey',
-        fontSize: values.fontxSmall - 1,
+        fontSize: Values.fontxSmall - 1,
     },
     value: {
         color: 'black',
-        fontSize: values.fontSmall,
+        fontSize: Values.fontSmall,
     }
 })

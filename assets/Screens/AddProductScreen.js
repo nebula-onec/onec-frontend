@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Text, Button, Alert } from "react-native";
 import { Input } from "reactstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import values from "../config/values";
+import Values from "../config/Values";
 
 const formValidationSchema = Yup.object().shape({
   productname: Yup.string()
@@ -36,8 +36,8 @@ function AddProductScreen(props) {
           onSubmit={(values_n,formikAction) => {
             setTimeout(()=>{
               alert("Submitted!");
+              console.log(values_n);
               formikAction.resetForm();
-              Alert(JSON.stringify(values_n, null, 2));
             },2000);
           }}
         >
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   inputField: {
     height: 40,
     marginVertical: 15,
-    backgroundColor: values.white,
+    backgroundColor: Values.white,
     borderRadius: 8,
     justifyContent: "center",
     padding: 5,
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 16,
-    color: values.red,
+    color: Values.red,
   },
   buttonContainer: {
     width: 80,

@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { AntDesign, Ionicons, Feather, Entypo } from "@expo/vector-icons";
-import Values from "../config/values";
+import Values from "../config/Values";
 import OrderCard from "../components/OrderCard";
 
 import data from "../files/data";

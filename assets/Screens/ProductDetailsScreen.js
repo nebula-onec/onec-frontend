@@ -11,7 +11,7 @@ import {
 
 import { getData } from "../Data";
 import { auto } from "@popperjs/core";
-import values from "../config/values";
+import Values from "../config/Values";
 
 function ProductDetailsScreen({ route, navigation }) {
   const { itemId } = route.params;
@@ -62,31 +62,31 @@ function ProductDetailsScreen({ route, navigation }) {
           <Text style={styles.name}>{productData.name}</Text>
         </View>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text style={{ fontSize: values.fontSmall }}>Price: </Text>
+          <Text style={{ fontSize: Values.fontSmall }}>Price: </Text>
           <Text style={{ fontSize: 22 }}>₹ {productData.price}</Text>
         </View>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text style={{ fontSize: values.fontSmall }}>Weight: </Text>
+          <Text style={{ fontSize: Values.fontSmall }}>Weight: </Text>
           <Text style={{ fontSize: 22 }}>{productData.weight}</Text>
         </View>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text style={{ fontSize: values.fontSmall }}>
+          <Text style={{ fontSize: Values.fontSmall }}>
             Available Quantity:{" "}
           </Text>
           <Text style={{ fontSize: 22 }}>{productData.avilable_qty}</Text>
         </View>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text style={{ fontSize: values.fontSmall }}>
+          <Text style={{ fontSize: Values.fontSmall }}>
             Country Of Origin:{" "}
           </Text>
           <Text style={{ fontSize: 22 }}>{productData.avilable_qty}</Text>
         </View>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text style={{ fontSize: values.fontSmall }}>Description: </Text>
+          <Text style={{ fontSize: Values.fontSmall }}>Description: </Text>
           <Text style={{ fontSize: 22 }}>{productData.avilable_qty}</Text>
         </View>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text style={{ fontSize: values.fontSmall }}>: </Text>
+          <Text style={{ fontSize: Values.fontSmall }}>: </Text>
           <Text style={{ fontSize: 22 }}>{productData.avilable_qty}</Text>
         </View>
       </View>

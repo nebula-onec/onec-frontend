@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import Values from '../config/values';
+import Values from '../config/Values';
 import { ScrollView, Text, View, StyleSheet, PermissionsAndroid, Pressable, TouchableOpacity} from "react-native";
 
 import data from './data';
