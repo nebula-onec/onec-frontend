@@ -37,7 +37,7 @@ function AddProductScreen(props) {
             setTimeout(()=>{
               alert("Submitted!");
               formikAction.resetForm();
-              Alert(JSON.stringify(values_n, null, 2));
+              //Alert(JSON.stringify(values_n, null, 2));
             },2000);
           }}
         >

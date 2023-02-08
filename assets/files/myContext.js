@@ -11,7 +11,7 @@ export const AuthContextProvider = ({children}) => {
     
     async function login(id, password){
         let message;
-        return fetch("/api/v1/admin/login", {
+        return fetch("http://192.168.0.107:8005/api/v1/admin/login", {
             credentials: 'include',
             method: 'POST',
             headers: {
@@ -24,15 +24,16 @@ export const AuthContextProvider = ({children}) => {
         })
         .then(res => res.json())
         .then(res => {
-            if(!res["success"])
-            message = res["message"]
+            if(!res["success"]){
+                message = res["message"]
+                alert(message)
+            }
             else
             setToken(123);
             return message;
         })
         .catch(e => {
             console.error(e)
-            setToken(123)
         })
     }
 
