@@ -1,4 +1,4 @@
-const values = {
+export default{
     primary: '#4d90fe',
     primary_background: '#fff',
     white: '#fff',
@@ -11,5 +11,3 @@ const values = {
     fontLarge: 24,
     fontxSmall: 14,
 }
-export const Values = values;
-export default values;

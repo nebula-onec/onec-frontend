@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, TextInput, Text, Button, Alert } from "react-native";
-import { Input } from "reactstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
-//import Values from "../config/Values";
 
 const formValidationSchema = Yup.object().shape({
   productname: Yup.string()
@@ -50,7 +48,7 @@ function AddProductScreen(props) {
             touched,
             handleBlur,
           }) => (
-            <>
+            <View>
               <TextInput
                 name="productname"
                 style={styles.inputField}
@@ -106,18 +104,19 @@ function AddProductScreen(props) {
               {errors.lngDes && touched.lngDes && (
                 <Text style={styles.errorText}>{errors.lngDes}</Text>
               )}
-              <Input
+              {/* <Input
                 type="file"
                 name="images"
                 onChange={(e) => {
                   setFieldValue("images", e.target);
                 }}
                 multiple
-              />
+              /> */}
+
               <View style={styles.buttonContainer}>
                 <Button title="Submit" onPress={handleSubmit} />
               </View>
-            </>
+            </View>
           )}
         </Formik>
       </View>
