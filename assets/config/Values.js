@@ -1,5 +1,6 @@
 const values = {
     primary: '#4d90fe',
+    primary_background: '#fff',
     white: '#fff',
     black: '#000',
     red:"red",

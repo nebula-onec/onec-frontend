@@ -8,6 +8,27 @@ import OrderCard from "../components/OrderCard";
 export default function HomeScrren({navigation}){
     var list = [1,2,3,4,5,6]
     let [low, sold] = [0, 0]
+    const [pendingOrders, setPendingOrders]= useState([]);
+
+    useEffect(() => {
+        let url = "http://192.168.0.107:8005/api/v1/admin/pendingorders";
+        fetch(url, {
+            credentials: 'include',
+        })
+        .then(res => res.json())
+        .then(res => {
+            if(res.success){
+                console.log('first')
+                console.log(res)
+            }
+            else {
+                console.log('error in homescreen fetch request')
+            }
+        })
+        .catch(e => {
+            console.error(e)
+        })
+    }, [])
 
     return (
         <ScrollView contentContainerStyle={styles.homeContainer}>
