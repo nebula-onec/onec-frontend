@@ -16,7 +16,7 @@ import AddOProductScreen from "./assets/Screens/AddProductScreen"
 
 export default function App() {
   const Stack = createNativeStackNavigator();
-  //const plat = Constants.pla
+  
   return (
     <SafeAreaProvider>
       <SafeAreaView style={{ flex: 1}} forceInset={{top: 'never'}}>

@@ -1,7 +1,7 @@
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { AntDesign, Ionicons, Feather,  Entypo } from '@expo/vector-icons';
 
-import Values from '../config/Values';
+import values from '../config/values';
 import { useNavigation } from "@react-navigation/native";
 
 export default function OrderCard(props){
@@ -46,9 +46,9 @@ export default function OrderCard(props){
 
 const styles = StyleSheet.create({
     current_order: {
-        backgroundColor: Values.white,
+        backgroundColor: values.white,
         margin: 8,
-        shadowColor: Values.black,
+        shadowColor: values.black,
         shadowOpacity: 0.35,
         shadowRadius: 3.84,
         elevation: 5,
@@ -71,21 +71,21 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         alignItems: 'flex-end',
         marginLeft: 'auto',
-        color: Values.primary,
+        color: values.primary,
         fontWeight: 'bold',
     },
     current_order_status: {
-        shadowColor: Values.black,
+        shadowColor: values.black,
         borderRadius: 2,
         shadowOpacity: 0.15,
         shadowRadius: 3.84,
         elevation: 2,
-        backgroundColor: Values.white,
+        backgroundColor: values.white,
         fontSize: 16,
         padding: 2,
-        color: Values.white
+        color: values.white
     },
     current_order_processed : {
-        color: Values.white,
+        color: values.white,
     },
 });

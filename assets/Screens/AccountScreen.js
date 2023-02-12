@@ -3,7 +3,7 @@ import {
   View,  StyleSheet,  Dimensions,  Image,  TouchableOpacity,  Text,  Alert,  Modal,} from "react-native";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Values from "../config/Values";
+import values from "../config/values";
 
 import { tokenContext } from "../files/myContext";
 
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   },
   logoutContainer: {
     marginVertical: 24,
-    backgroundColor: Values.primary,
+    backgroundColor: values.primary,
     height: 40,
     width: 120,
     justifyContent: "center",

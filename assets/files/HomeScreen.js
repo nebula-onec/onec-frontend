@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import Values from '../config/Values';
+import values from '../config/values';
 import { ScrollView, Text, View, StyleSheet, PermissionsAndroid, Pressable, TouchableOpacity} from "react-native";
 
 import data from './data';
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        backgroundColor: Values.white,
+        backgroundColor: values.white,
         marginHorizontal: 8,
         paddingVertical: 24,
         borderRadius: 12,
@@ -85,18 +85,18 @@ const styles = StyleSheet.create({
         elevation: 12,
     },
     boxText: {
-        color: Values.primary,
+        color: values.primary,
         fontWeight: 'bold',
         fontSize: 16
     }, 
     sales_last_week : {
         flex: 1,
         borderWidth: 0,        
-        borderColor: Values.primary,
+        borderColor: values.primary,
         borderRadius: 16,
         color: '#000',
         padding: 12,
-        backgroundColor: Values.white,
+        backgroundColor: values.white,
         fontSize: 14,
         shadowColor: "#000",
         shadowOpacity: 0.23,
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 8
     },
     product_summary :{
-        borderColor: Values.black,
+        borderColor: values.black,
         borderWidth: 0,
         fontSize: 14,
         marginHorizontal: 8,

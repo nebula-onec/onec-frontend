@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import { ScrollView, Text, View, StyleSheet, PermissionsAndroid, Pressable, Image, useWindowDimensions, TouchableOpacity} from "react-native";
 import { AuthContextProvider } from "./myContext";
 import { orderById } from "./orderById";
-import Values from "../config/Values";
+import values from "../config/values";
 import { useNavigation } from "@react-navigation/native";
 
 export default function OrderDetails({route}) {
@@ -25,7 +25,6 @@ export default function OrderDetails({route}) {
     
     useEffect(()=> {
         console.log(route?.params.orderID)
-        
         
         let url = "http://192.168.0.107:8005/api/v1/admin/order/" + ( route?.params.orderID ? route?.params.orderID : '4');
         fetch(url, {
@@ -102,7 +101,7 @@ const styles = StyleSheet.create({
     outerContainer: {
       width: '100%',
       flex: 1,  
-      backgroundColor: Values.white,
+      backgroundColor: values.white,
     },
     innerContainer: {
         width: '100%',
@@ -146,14 +145,14 @@ const styles = StyleSheet.create({
     imageContainer: {
     },
     heading: {
-        fontSize: Values.fontLarge,
+        fontSize: values.fontLarge,
     },
     field: {
         color: 'grey',
-        fontSize: Values.fontxSmall - 1,
+        fontSize: values.fontxSmall - 1,
     },
     value: {
         color: 'black',
-        fontSize: Values.fontSmall,
+        fontSize: values.fontSmall,
     }
 })

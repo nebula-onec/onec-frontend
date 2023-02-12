@@ -10,4 +10,5 @@ const values = {
     fontLarge: 24,
     fontxSmall: 14,
 }
+export const Values = values;
 export default values;

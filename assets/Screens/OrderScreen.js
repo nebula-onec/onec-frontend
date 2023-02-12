@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { AntDesign, Ionicons, Feather, Entypo } from "@expo/vector-icons";
-import Values from "../config/Values";
+import values from "../config/values";
 import OrderCard from "../components/OrderCard";
 
 import data from "../files/data";
@@ -105,9 +105,9 @@ const styles = StyleSheet.create({
   },
   current_order: {
     flex: 1,
-    backgroundColor: Values.white,
+    backgroundColor: values.white,
     margin: 8,
-    shadowColor: Values.black,
+    shadowColor: values.black,
     shadowOpacity: 0.35,
     shadowRadius: 3.84,
     elevation: 5,
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     textAlign: "right",
     alignItems: "flex-end",
     marginLeft: "auto",
-    color: Values.primary,
+    color: values.primary,
     fontWeight: "bold",
   },
 });
