@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import { ScrollView, Text, View, StyleSheet, PermissionsAndroid, Pressable, Image, useWindowDimensions, TouchableOpacity} from "react-native";
-import { AuthContextProvider } from "./myContext";
 import { orderById } from "./orderById";
 import values from "../config/values";
 import { useNavigation } from "@react-navigation/native";

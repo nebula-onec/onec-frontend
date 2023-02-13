@@ -10,7 +10,6 @@ import {
 } from "react-native";
 
 import { getData } from "../Data";
-import { auto } from "@popperjs/core";
 import values from "../config/values";
 
 function ProductDetailsScreen({ route, navigation }) {
@@ -105,7 +104,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flexWrap: "wrap",
     maxWidth: 700,
-    marginHorizontal: auto,
+    marginHorizontal: "auto",
   },
   imageSliderContainer: {
     justifyContent: "center",
