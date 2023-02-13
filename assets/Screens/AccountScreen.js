@@ -26,7 +26,6 @@ if (width > 500) {
 //     //     onPress: () => console.log('cancle logout'),
 //     //   }
 //     // ])
-
 //   );
 // };
 

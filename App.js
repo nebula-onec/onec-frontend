@@ -1,14 +1,11 @@
-import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
-import { Constants } from "expo-constants";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React, { createContext, useContext, useState } from "react";
 
 import SplashScreen from "./assets/files/SplashScreen.js";
 import LoginScreen from "./assets/files/LoginScreen.js";
 
-import { tokenContext, AuthContextProvider } from "./assets/files/myContext";
-import { initialWindowMetrics, SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { AuthContextProvider } from "./assets/files/myContext";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import BottomNavigator from "./assets/components/BottomNavigator.js";
 import ProductDetailsScreen from './assets/Screens/ProductDetailsScreen';
 import OrderDetails from "./assets/files/OrderDetails.js";
@@ -16,13 +13,12 @@ import AddOProductScreen from "./assets/Screens/AddProductScreen"
 
 export default function App() {
   const Stack = createNativeStackNavigator();
-  
+
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 1}} forceInset={{top: 'never'}}>
         <AuthContextProvider>
           <NavigationContainer>
-            <Stack.Navigator initialRouteName="Splash">
+            <Stack.Navigator initialRouteName="Splash" headerMode="none">
               <Stack.Screen
                 name="Splash"
                 component={SplashScreen}
@@ -66,7 +62,6 @@ export default function App() {
             </Stack.Navigator>
           </NavigationContainer>
         </AuthContextProvider>
-      </SafeAreaView>
     </SafeAreaProvider>
   );
 }
