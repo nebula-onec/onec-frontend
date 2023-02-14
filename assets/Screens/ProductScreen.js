@@ -1,20 +1,9 @@
-import React, { useState } from "react";
-import {
-  View,
-  FlatList,
-  StyleSheet,
-  Dimensions,
-  TextInput,
-  TouchableOpacity,
-  Modal,
-  Text,
-  Image,
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import {  View,  FlatList,  StyleSheet, Dimensions,  TextInput,  TouchableOpacity,  Modal,  Text,  Image,} from "react-native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import ProductCard from "../components/ProductCard";
 import {getDatas} from "../Data";
-import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
 let col = 1;
@@ -31,8 +20,38 @@ function ProductScreen({navigation, route}) {
   const Data=getDatas();
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState(Data);
+  const [productsData, setProductsData] = useState([
+    {
+      product_id: 1,
+      product_name: "Sample Product Name",
+      price: 14500,
+      category_id: null,
+      description_short: "This is ample description",
+      stock: 100,
+      image_url: null
+    }
+  ])
   const [oldData, setOldData] = useState(Data);
   const renderItem = ({ item }) => <ProductCard data={item} navigation={navigation}/>;
+
+  useEffect(() => {
+    let url = "http://192.168.0.107:8005";
+    fetch(url + "/api/v1/admin/products", {
+        credentials: 'include',
+    })
+    .then(res => res.json())
+    .then(res => {
+        if(res.success){
+          setProductsData(res.products)
+        }
+        else {
+          console.log('error in Product Screen fetch request')
+        }
+    }, [])
+    .catch(e => {
+        console.error(e)
+    })
+  }, [])
 
   const list_header = () => {
     return (
@@ -155,8 +174,8 @@ function ProductScreen({navigation, route}) {
             justifyContent: "center",
             alignItems: "center",
           }}
-          data={data}
-          keyExtractor={(item) => item.id}
+          data={productsData}
+          keyExtractor={(item) => item.product_id}
           renderItem={renderItem}
           numColumns={col}
         />

@@ -1,14 +1,6 @@
 import React, { useState } from "react";
-import {
-  View,
-  FlatList,
-  StyleSheet,
-  TextInput,
-  Text,
-  Image,
-  TouchableOpacity,
-} from "react-native";
-import { AntDesign, Ionicons, Feather, Entypo } from "@expo/vector-icons";
+import {  View,  FlatList,  StyleSheet,  TextInput,  Image, } from "react-native";
+import { AntDesign, } from "@expo/vector-icons";
 import values from "../config/values";
 import OrderCard from "../components/OrderCard";
 
@@ -17,7 +9,14 @@ import data from "../files/data";
 function OrderScreen({navigation}) {
   const [orderData, setOrderData] = useState(data);
   const [oldOrderData, setOldOrderData] = useState(data);
-  const renderItem = ({ item }) => <OrderCard {...item}/>;
+  const renderItem = ({ item }) => {
+    console.log(item)
+    return (
+      <OrderCard 
+        {...item}        
+      />
+    )
+  };
 
   const handleSearch = (orderNo) => {
     let formattedQuery = orderNo.toString();
