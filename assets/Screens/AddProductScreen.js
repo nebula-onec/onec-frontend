@@ -1,25 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { View,  StyleSheet,  TextInput,  Text,  Button,  useWindowDimensions,  Platform, ScrollView} from "react-native";
-import { Field, Formik, Form } from "formik";
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  Text,
+  Button,
+  useWindowDimensions,
+  Platform,
+  ScrollView,
+} from "react-native";
+import { Field, Formik, Form, useFormikContext } from "formik";
 import * as Yup from "yup";
-// import { platform } from "os";
+import * as ImagePicker from "expo-image-picker";
+import ImageInput from "../components/ImageInput";
+import ImageInputList from "../components/ImageInputList";
+// import { Input } from "reactstrap";
 
 const formValidationSchema = Yup.object().shape({
   productname: Yup.string()
+    .required("Required")
     .min(3, "Its too Short")
-    .max(20, "Its too Long")
-    .label("Product Name")
-    .required("Required"),
+    .label("Product Name"),
   price: Yup.number()
-    .required("Required!")
-    .positive()
+    .required()
     .label("Price")
     .typeError("Input must be number type"),
-  avlStock: Yup.number("Value must be number")
-    .required("Required!")
-    .typeError("Input must be number type"),
+  avlStock: Yup.number().required().typeError("Input must be number type"),
   srtDes: Yup.string().max(120, "Maximum limit Exceeded"),
   lngDes: Yup.string().max(250, "Maximum limit Exceeded"),
+  images: Yup.array()
+    .min(1, "Please Select at least One image")
+    .max(6)
+    .label("Images"),
 });
 
 const inputwidth = Platform.OS == "web" ? "100%" : "100%";
@@ -31,20 +43,30 @@ function AddProductScreen(props) {
   const styles2 = StyleSheet.create({
     inputContainer: {
       flex: 1,
-      alignItems: `${width > 500 ? "center" : 'baseline'}`,
-      margin:12,
+      alignItems: `${width > 500 ? "center" : "baseline"}`,
+      margin: 12,
       flexDirection: `${width > 500 ? "row" : "column"}`,
       justifyContent: `${width > 500 ? "space-between" : "center"}`,
-      textAlign: 'left'
+      textAlign: "left",
     },
     inputInnerContainer: {
       flexDirection: "column",
       width: `${width > 500 ? "50%" : "100%"}`,
-      alignSelf: 'flex-end',
-    }
+      alignSelf: "flex-end",
+    },
   });
+
+  // const {setFieldValue,values} = useFormikContext();
+
+  // const handleAdd = (uri) => {
+  //   setFieldValue("images",[...values["images"],uri]);
+  // }
+
   return (
-    <ScrollView style={{flex:1,flexDirection:"column"}} contentContainerStyle={styles.container}>
+    <ScrollView
+      style={{ flex: 1, flexDirection: "column" }}
+      contentContainerStyle={styles.container}
+    >
       <View style={styles.header}>
         <Text style={styles.headerText}>Add Your Product </Text>
       </View>
@@ -55,12 +77,14 @@ function AddProductScreen(props) {
           avlStock: "",
           srtDes: "",
           lngDes: "",
+          images: [],
         }}
         validationSchema={formValidationSchema}
         onSubmit={(values_n, formikAction) => {
           setTimeout(() => {
             alert("Submitted!");
             console.log(values_n);
+
             formikAction.resetForm();
           }, 2000);
         }}
@@ -75,7 +99,7 @@ function AddProductScreen(props) {
           handleBlur,
         }) => (
           <View style={styles.formContainer}>
-            <View style={styles2.inputContainer} >
+            <View style={styles2.inputContainer}>
               <View>
                 <Text>Product Name : </Text>
               </View>
@@ -94,7 +118,7 @@ function AddProductScreen(props) {
                 ) : null}
               </View>
             </View>
-            <View style={styles2.inputContainer} >
+            <View style={styles2.inputContainer}>
               <Text>Price : </Text>
               <View style={styles2.inputInnerContainer}>
                 <TextInput
@@ -111,7 +135,7 @@ function AddProductScreen(props) {
                 ) : null}
               </View>
             </View>
-            <View style={styles2.inputContainer} >
+            <View style={styles2.inputContainer}>
               <Text>Available Stock : </Text>
               <View style={styles2.inputInnerContainer}>
                 <TextInput
@@ -127,7 +151,7 @@ function AddProductScreen(props) {
                 ) : null}
               </View>
             </View>
-            <View style={styles2.inputContainer} >
+            <View style={styles2.inputContainer}>
               <Text>Short Description : </Text>
               <View style={styles2.inputInnerContainer}>
                 <TextInput
@@ -146,7 +170,7 @@ function AddProductScreen(props) {
                 ) : null}
               </View>
             </View>
-            <View style={styles2.inputContainer} >
+            <View style={styles2.inputContainer}>
               <Text>Long Description : </Text>
               <View style={styles2.inputInnerContainer}>
                 <TextInput
@@ -173,7 +197,12 @@ function AddProductScreen(props) {
                 }}
                 multiple
               /> */}
-
+            <View style={{flexDirection:"column"}}>
+              <ImageInputList name={"images"} />
+              {errors.images && touched.images ? (
+                <Text style={styles.errorText}>{errors.images}</Text>
+              ) : null}
+            </View>
             <View style={styles.buttonContainer}>
               <Button title="Submit" onPress={handleSubmit} />
             </View>
@@ -189,8 +218,9 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "column",
     paddingVertical: 40,
-    padding:8,
-    maxWidth:700,marginHorizontal:"auto"
+    padding: 8,
+    maxWidth: 700,
+    marginHorizontal: "auto",
   },
   header: {
     marginVertical: 20,
@@ -220,7 +250,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 5,
     paddingLeft: 10,
-    textAlignVertical: 'top'
+    textAlignVertical: "top",
   },
   inputField_3: {
     height: 100,
@@ -230,7 +260,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 5,
     paddingLeft: 10,
-    textAlignVertical: 'top'
+    textAlignVertical: "top",
   },
   errorText: {
     fontSize: 16,
