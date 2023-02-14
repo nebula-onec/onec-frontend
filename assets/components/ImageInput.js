@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
     width:100,
     justifyContent: "center",
     overflow: "hidden",
-    alignContent:"center"
+    alignContent:"center",
+    cursor: 'pointer'
   },
   image: {
     height: 100,
