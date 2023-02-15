@@ -1,18 +1,5 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  Image,
-  Dimensions,
-  useWindowDimensions
-} from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ProductDetailsScreen from "../Screens/ProductDetailsScreen";
-import { createStackNavigator } from "@react-navigation/stack";
-
+import {  View,  StyleSheet,  TouchableOpacity,  Text,  Image,  Dimensions,  useWindowDimensions} from "react-native";
 
 function ProductCard({ data, navigation, root }) {
   const { width } = useWindowDimensions();
@@ -37,18 +24,19 @@ function ProductCard({ data, navigation, root }) {
     imageWidth = 150;
     imageHeight = 100;
   }
-  let { image, name, weight, price, avilable_qty, id } = data;
+  let { image_url, product_name, category_id, price, stock, product_id } = data;
+  if(!image_url) image_url = "https://fastly.picsum.photos/id/2/536/354.jpg?hmac=EVqChBVjwdZVaEJoMQgFSzZhsD72o5119rYcaw33YBo"
   return (
     <TouchableOpacity
       style={[styles.container,{width: container_width,flexDirection:flexDirection}]}
-      onPress={() => navigation.navigate("ProductDetails", { itemId: id })}
+      onPress={() => navigation.navigate("ProductDetails", { itemId: product_id })}
     >
       <View style={styles.cardImage}>
-        <Image style={[styles.image,{width:imageWidth, height:imageHeight}]} source={image[0].image} resizeMode="cover" />
+        <Image style={[styles.image,{width:imageWidth, height:imageHeight}]} source={image_url} resizeMode="cover" />
       </View>
       <View style={styles.productDetails}>
         <View style={[styles.nameCntainer,{alignSelf: alignName}]}>
-          <Text style={styles.cardName}>{name}</Text>
+          <Text style={styles.cardName}>{product_name}</Text>
         </View>
         <View style={[styles.extraDetailsContainer,{flexDirection:extraDetailsContainerDirection}]}>
           <View>
@@ -57,12 +45,12 @@ function ProductCard({ data, navigation, root }) {
               <Text>₹{price}</Text>
             </View>
             <View style={styles.weightContainer}>
-              <Text tyle={{ color: "green" }}>{weight}</Text>
+              <Text tyle={{ color: "green" }}>{category_id}</Text>
             </View>
           </View>
           <View style={styles.avilableQtyContainer}>
             <Text style={styles.quantity}>Available Qty: </Text>
-            <Text>{avilable_qty}</Text>
+            <Text>{stock}</Text>
           </View>
         </View>
       </View>
@@ -99,7 +87,7 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   cardName: {
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: "600",
     color: "#878787",
   },

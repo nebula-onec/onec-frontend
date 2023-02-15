@@ -60,6 +60,7 @@ function AddProductScreen(props) {
 
   const submitRequest = (values_n) => {
     console.log(values_n);
+    values_n.images = []
     let url = "http://192.168.0.107:8005";
     fetch(url + "/api/v1/admin/createproduct", {
       method: "POST",
@@ -100,7 +101,7 @@ function AddProductScreen(props) {
         validationSchema={formValidationSchema}
         onSubmit={(values_n, formikAction) => {
           setLoading(true);
-          console.log("234324234");
+          console.log("1111asdad")
           setTimeout(() => {
             alert("Submitted!");
             // submitRequest(values_n)
@@ -227,7 +228,7 @@ function AddProductScreen(props) {
                 <Text style={styles.errorText}>{errors.images}</Text>
               ) : null}
             </View>
-            <View style={styles.buttonContainer}>
+            <View style={styles.buttonContainer} onPress={handleSubmit}>
               <Button title="Submit" onPress={handleSubmit} />
               {/* <Image source={require('../images/loading_mid.gif')} style={{width: 32, height: 32, display: `${isloading ? 'block' : 'none'}`}} resizeMode={'contain'} /> */}
             </View>

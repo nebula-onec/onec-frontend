@@ -6,12 +6,28 @@ import data from './data';
 import OrderCard from "../components/OrderCard";
 
 export default function HomeScrren({navigation}){
-    var list = [1,2,3,4,5,6]
-    let [low, sold] = [0, 0]
-    const [pendingOrders, setPendingOrders]= useState([]);
+    const [homeData, setHomeData]= useState({
+        orders: 0,
+        n_customers: 0,
+        n_products: 0,
+        unavailable_products: 0,
+        n_sold: 0,
+        unfulfilled_orders: {
+            number: 0,
+            orders: [
+                {
+                    order_id: 0,
+                    order_date: "2023-02-14T06:03:40.000Z",
+                    order_status: 1,
+                    user_id: 0,
+                    name: "Sample Name"
+                }
+            ]
+        }
+    });
 
     useEffect(() => {
-        let url = "http://192.168.0.107:8005/api/v1/admin/pendingorders";
+        let url = "http://192.168.0.107:8005/api/v1/admin/home";
         fetch(url, {
             credentials: 'include',
         })
@@ -20,6 +36,7 @@ export default function HomeScrren({navigation}){
             if(res.success){
                 console.log('first')
                 console.log(res)
+                setHomeData(res.info)
             }
             else {
                 console.log('error in homescreen fetch request')
@@ -35,36 +52,41 @@ export default function HomeScrren({navigation}){
             <Pressable style={styles.pressableContainer}>
             <View style={styles.horizontal}>
                 <View style={styles.horizontal1}>
-                    <Text style={styles.boxText}> {list[0]} </Text>
+                    <Text style={styles.boxText}> {homeData.orders} </Text>
                     <Text style={styles.boxText}>Orders</Text>
                 </View>
                 <View style={styles.horizontal1}>
-                    <Text style={styles.boxText}> {list[1]} </Text>
+                    <Text style={styles.boxText}> {homeData.n_customers} </Text>
                     <Text style={styles.boxText}>Customers</Text>
                 </View>
                 <View style={styles.horizontal1}>
-                    <Text style={styles.boxText}> {list[2]} </Text>
+                    <Text style={styles.boxText}> {homeData.n_products} </Text>
                     <Text style={styles.boxText}>Products</Text>
                 </View>
             </View>
             <View style={styles.horizontal}>
                 <Text style={styles.sales_last_week}> 
-                    Sales Last Week: <Text style={{fontSize:22}}>{"\n " + list[3]}</Text> 
+                    Sales Last Week: <Text style={{fontSize:22}}>{"\n " + homeData.n_sold}</Text> 
                 </Text>
             </View>
             <View style={styles.horizontal}>
                 <Text style={{...styles.sales_last_week, ...styles.product_summary}}>
-                    <Text style={{fontSize: 22}}>{low + "\n"}</Text> Low Stock Products
+                    <Text style={{fontSize: 22}}>{0 + "\n"}</Text> Low Stock Products
                 </Text>
                 <Text style={{...styles.sales_last_week, ...styles.product_summary}}>
-                    <Text style={{fontSize: 22}}>{sold + "\n"}</Text> Sold Out Products
+                    <Text style={{fontSize: 22}}>{homeData.unavailable_products + "\n"}</Text> Sold Out Products
                 </Text>
             </View>
             <View style={styles.vertical}>
                 {
-                    data.map( (data, index) => 
+                    homeData.unfulfilled_orders.orders.map( (data, index) => 
                         <OrderCard 
-                        {...data}
+                        orderID={data.order_id}
+                        time={data.order_date}
+                        status={data.order_status}
+                        userId={data.user_id}
+                        name={data.name}
+                        phone={data.phone}
                         key={index}
                         />
                     )
