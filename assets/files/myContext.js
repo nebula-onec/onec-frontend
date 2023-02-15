@@ -11,7 +11,8 @@ export const AuthContextProvider = ({children}) => {
     
     async function login(id, password){
         let message;
-        let url = "http://192.168.0.107:8005";
+        // let url = "http://192.168.0.107:8005";
+        let url = ""
         return fetch(url + "/api/v1/admin/login", {
             credentials: 'include',
             method: 'POST',

@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { View,  StyleSheet,  TextInput,  Text,  Button,  useWindowDimensions,  Platform, ScrollView, Image} from "react-native";
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  Text,
+  Button,
+  useWindowDimensions,
+  Platform,
+  ScrollView,
+  Image,
+  Alert,
+} from "react-native";
 import { Field, Formik, Form } from "formik";
 import * as Yup from "yup";
 import * as ImagePicker from "expo-image-picker";
@@ -9,23 +20,23 @@ import ImageInputList from "../components/ImageInputList";
 
 const formValidationSchema = Yup.object().shape({
   product_name: Yup.string()
+  .required("Required!")
     .min(3, "Its too Short")
     .max(50, "Its too Long")
-    .label("Product Name")
-    .required("Required"),
+    .label("Product Name"),
   price: Yup.number()
-    .required()
+    .required("Required!")
     .label("Price")
     .typeError("Input must be number type"),
-  images: Yup.array()
-    .min(1, "Please Select at least One image")
-    .max(6)
-    .label("Images"),
-  stock: Yup.number("Value must be number")
+  stock: Yup.number()
     .required("Required!")
     .typeError("Input must be number type"),
   description_short: Yup.string().max(120, "Maximum limit Exceeded"),
   description_long: Yup.string().max(250, "Maximum limit Exceeded"),
+  images: Yup.array()
+    .min(1, "Please Select at least One image")
+    .max(6)
+    .label("Images"),
 });
 
 function AddProductScreen(props) {
@@ -48,26 +59,26 @@ function AddProductScreen(props) {
   });
 
   const submitRequest = (values_n) => {
-    console.log(values_n)
+    console.log(values_n);
     let url = "http://192.168.0.107:8005";
     fetch(url + "/api/v1/admin/createproduct", {
-      method: 'POST',
-      credentials: 'include',
+      method: "POST",
+      credentials: "include",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(values_n)
+      body: JSON.stringify(values_n),
     })
-    .then(res => res.json())
-    .then(res => {
-      console.log(res);
-      setLoading(false);
-    })
-    .catch(e => {
-      console.log(e)
-      setLoading(false)
-    })
-  }
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setLoading(false);
+      });
+  };
 
   return (
     <ScrollView
@@ -89,11 +100,11 @@ function AddProductScreen(props) {
         validationSchema={formValidationSchema}
         onSubmit={(values_n, formikAction) => {
           setLoading(true);
+          console.log("234324234");
           setTimeout(() => {
             alert("Submitted!");
-            submitRequest(values_n)
+            // submitRequest(values_n)
             console.log(values_n);
-
             formikAction.resetForm();
           }, 1000);
         }}
@@ -102,10 +113,10 @@ function AddProductScreen(props) {
           handleChange,
           handleSubmit,
           values,
-          setFieldValue,
           errors,
           touched,
           handleBlur,
+          setFieldTouched
         }) => (
           <View style={styles.formContainer}>
             <View style={styles2.inputContainer}>
@@ -118,8 +129,8 @@ function AddProductScreen(props) {
                   style={styles.inputField_1}
                   placeholder="Product Name"
                   value={values.product_name}
-                  onChange={handleChange("product_name")}
-                  onBlur={handleBlur("product_name")}
+                  onChangeText={handleChange("product_name")}
+                  onBlur={()=>setFieldTouched("product_name")}
                   placeholderTextColor="#a0adc3"
                 />
                 {errors.product_name && touched.product_name ? (
@@ -135,8 +146,8 @@ function AddProductScreen(props) {
                   style={styles.inputField_1}
                   placeholder="Price"
                   value={values.price}
-                  onChange={handleChange("price")}
-                  onBlur={handleBlur("price")}
+                  onChangeText={handleChange("price")}
+                  onBlur={()=>setFieldTouched("price")}
                   placeholderTextColor="#a0adc3"
                 />
                 {errors.price && touched.price ? (
@@ -151,8 +162,8 @@ function AddProductScreen(props) {
                   name="stock"
                   style={styles.inputField_1}
                   value={values.stock}
-                  onChange={handleChange("stock")}
-                  onBlur={handleBlur("stock")}
+                  onChangeText={handleChange("stock")}
+                  onBlur={()=>setFieldTouched("stock")}
                   placeholderTextColor="#a0adc3"
                 />
                 {errors.stock && touched.stock ? (
@@ -168,14 +179,16 @@ function AddProductScreen(props) {
                   style={styles.inputField_2}
                   placeholder="Short Description"
                   value={values.description_short}
-                  onChange={handleChange("description_short")}
-                  onBlur={handleBlur("description_short")}
+                  onChangeText={handleChange("description_short")}
+                  onBlur={()=>setFieldTouched("description_short")}
                   multiline
                   numberOfLines={2}
                   placeholderTextColor="#a0adc3"
                 />
                 {errors.description_short && touched.description_short ? (
-                  <Text style={styles.errorText}>{errors.description_short}</Text>
+                  <Text style={styles.errorText}>
+                    {errors.description_short}
+                  </Text>
                 ) : null}
               </View>
             </View>
@@ -187,14 +200,16 @@ function AddProductScreen(props) {
                   style={styles.inputField_3}
                   placeholder="Long Description"
                   value={values.description_long}
-                  onChange={handleChange("description_long")}
-                  onBlur={handleBlur("description_long")}
+                  onChangeText={handleChange("description_long")}
+                  onBlur={()=>setFieldTouched("description_long")}
                   multiline
                   numberOfLines={5}
                   placeholderTextColor="#a0adc3"
                 />
                 {errors.description_long && touched.description_long ? (
-                  <Text style={styles.errorText}>{errors.description_long}</Text>
+                  <Text style={styles.errorText}>
+                    {errors.description_long}
+                  </Text>
                 ) : null}
               </View>
             </View>
@@ -206,7 +221,7 @@ function AddProductScreen(props) {
                 }}
                 multiple
               /> */}
-            <View style={{flexDirection:"column"}}>
+            <View style={{ flexDirection: "column" }}>
               <ImageInputList name={"images"} />
               {errors.images && touched.images ? (
                 <Text style={styles.errorText}>{errors.images}</Text>
@@ -214,7 +229,7 @@ function AddProductScreen(props) {
             </View>
             <View style={styles.buttonContainer}>
               <Button title="Submit" onPress={handleSubmit} />
-              <Image source={require('../images/loading_mid.gif')} style={{width: 32, height: 32, display: `${isloading ? 'block' : 'none'}`}} resizeMode={'contain'} />
+              {/* <Image source={require('../images/loading_mid.gif')} style={{width: 32, height: 32, display: `${isloading ? 'block' : 'none'}`}} resizeMode={'contain'} /> */}
             </View>
           </View>
         )}
@@ -254,7 +269,7 @@ const styles = StyleSheet.create({
   },
   inputField_2: {
     height: 60,
-    width: '100%',
+    width: "100%",
     marginVertical: 15,
     backgroundColor: "#fff", //Values.white
     borderRadius: 8,
@@ -264,7 +279,7 @@ const styles = StyleSheet.create({
   },
   inputField_3: {
     height: 100,
-    width: '100%',
+    width: "100%",
     marginVertical: 15,
     backgroundColor: "#fff", //Values.white
     borderRadius: 8,
@@ -282,7 +297,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 3,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
 });
 
