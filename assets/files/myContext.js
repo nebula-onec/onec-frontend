@@ -1,7 +1,6 @@
 import React, {createContext, useEffect, useState} from 'react';
-import BottomNavigator from "../components/BottomNavigator.js";
 import LoginScreen from './LoginScreen.js';
-import OrderDetails from './OrderDetails.js';
+import {url} from '../config/url.js';
 
 export const tokenContext = createContext();
 
@@ -11,9 +10,8 @@ export const AuthContextProvider = ({children}) => {
     
     async function login(id, password){
         let message;
-        // let url = "http://192.168.0.107:8005";
-        let url = ""
-        return fetch(url + "/api/v1/admin/login", {
+        let url2 = url;
+        return fetch(url2 + "/api/v1/admin/login", {
             credentials: 'include',
             method: 'POST',
             headers: {
@@ -26,8 +24,10 @@ export const AuthContextProvider = ({children}) => {
         })
         .then(res => res.json())
         .then(res => {
-            if(!res["success"])
-            message = res["message"]
+            if(!res["success"]){
+                message = res["message"]
+                setToken(124)
+            }
             else
             setToken(123);
             return message;

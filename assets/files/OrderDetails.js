@@ -22,16 +22,13 @@ export default function OrderDetails({route}) {
         products: []
     });
     
-    useEffect(()=> {
-        console.log(route?.params.orderID)
-        
+    useEffect(()=> {        
         let url = "http://192.168.0.107:8005/api/v1/admin/order/" + ( route?.params.orderID ? route?.params.orderID : '4');
         fetch(url, {
             credentials: 'include',
         })
         .then(res => res.json())
         .then(res => {
-            console.log(res)
             if(res.success){
                 setData(res.order)
             }

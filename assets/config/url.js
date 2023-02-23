@@ -1,3 +1,1 @@
-export default {
-    "url": "http://192.162.0.107"
-}
+export const url = "http://192.168.0.109:8005";

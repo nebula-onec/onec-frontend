@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState} from 'react';
-import { View, Text, StyleSheet, Image, TextInput, Button, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, Button, TouchableOpacity, Platform} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { tokenContext } from './myContext';
 
@@ -9,6 +9,12 @@ export default function LoginScreen({navigation}){
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("Welcome!");
+
+    useEffect(() => {
+        if(Platform.OS == 'web'){
+            // console.log(document.cookie.token)
+        }
+    })
 
     return (
         <SafeAreaView style={st.container}>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {  View,  FlatList,  StyleSheet,  TextInput,  Image, } from "react-native";
+import {  View,  FlatList,  StyleSheet,  TextInput,  Image, RefreshControl} from "react-native";
 import { AntDesign, } from "@expo/vector-icons";
 import values from "../config/values";
 import OrderCard from "../components/OrderCard";
@@ -10,13 +10,21 @@ function OrderScreen({navigation}) {
   const [orderData, setOrderData] = useState(data);
   const [oldOrderData, setOldOrderData] = useState(data);
   const renderItem = ({ item }) => {
-    console.log(item)
     return (
       <OrderCard 
         {...item}        
       />
     )
   };
+
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = React.useCallback(() => {
+      setRefreshing(true);
+      setTimeout(() => {
+      setRefreshing(false);
+      }, 2000);
+  }, []);
 
   const handleSearch = (orderNo) => {
     let formattedQuery = orderNo.toString();
@@ -51,6 +59,9 @@ function OrderScreen({navigation}) {
         <FlatList
           data={orderData}
           keyExtractor={(item) => item.orderID}
+          refreshControl= {
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
           renderItem={renderItem}
         />
       )}
