@@ -1,18 +1,24 @@
 import React, { useState, useContext } from "react";
 import {
-  View,  StyleSheet,  Dimensions,  Image,  TouchableOpacity,  Text,  Alert,  Modal,} from "react-native";
+  View,
+  StyleSheet,
+  Dimensions,
+  Image,
+  TouchableOpacity,
+  Text,
+  Alert,
+  Platform,
+} from "react-native";
 
+import * as ImagePicker from 'expo-image-picker';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import values from "../config/values";
 
 import { tokenContext } from "../files/myContext";
+import ImageInput from "../components/ImageInput";
 
 const { height, width } = Dimensions.get("window");
 
-let containerWidth;
-if (width > 500) {
-  containerWidth = width / 2;
-}
 // const popup = () => {
 //   const [visible, setVisible] = useState(false);
 //   return (
@@ -30,44 +36,63 @@ if (width > 500) {
 // };
 
 function AccountScreen(props) {
-  const [userName, setUserName] = useState("Meet Patel");
-  const [visible, setVisible] = useState(false);
-  
-  const {logout} = useContext(tokenContext);
+  const [userName, setUserName] = useState({
+    firstName: "Mit",
+    lastName: "Patel",
+  });
+  const [imageUri, setImageUri] = useState(null);
+
+  const { logout } = useContext(tokenContext);
+  useEffect(()=>{requestPermission();},[])
+
+    const requestPermission = async () => {
+        const {granted} = await ImagePicker.requestCameraPermissionsAsync();
+        if(!granted) alert("You need to enable permission to access your image library");
+    }
+
+  const ProfileImage = () => {
+    return (
+      <View>
+        <Image source={{ uri: imageUri }} style={styles.image} />
+      </View>
+    )
+  }
+  const handlePress = () => {
+    if(!imageUri) selectImage();
+    else {
+        if(Platform.OS=='web'){
+            if(window.confirm("Are you sure you want to delete this image?")){
+              onChangeImage(null);
+            }
+        }
+        else{
+            Alert.alert("Delete", "Are you sure you want to delete this image?",[{text:"Yes", onPress: () => onChangeImage(null)},{text:"No"}]);
+        }
+    }
+}
 
   return (
     <View style={styles.outerContainer}>
       <View style={styles.profileDetailsContainer}>
-        <TouchableOpacity style={styles.imageContainer}>
-          <MaterialCommunityIcons
-            name="account"
-            size={80}
-          ></MaterialCommunityIcons>
-        </TouchableOpacity>
-        <View style={styles.detailesContainer}>
-          <Text>{userName}</Text>
+        <View style={styles.profileHeader}>
+          <View style={styles.userNameContainer}>
+            <Text style={styles.welcomeText}>Hello.. </Text>
+            <Text style={styles.firstNameText}>{userName.firstName}</Text>
+          </View>
+          <TouchableOpacity style={styles.imageContainer}>
+            {!imageUri && (
+              <MaterialCommunityIcons
+                name="account"
+                size={48}
+              ></MaterialCommunityIcons>
+            )}
+            {imageUri && <ImageContainer/>}
+          </TouchableOpacity>
         </View>
       </View>
-      <TouchableOpacity
-        style={styles.logoutContainer}
-        onPress={logout}
-      >
+      <TouchableOpacity style={styles.logoutContainer} onPress={logout}>
         <Text>Logout</Text>
       </TouchableOpacity>
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={visible}
-        onRequestClose={() => {
-          setVisible(!visible);
-        }}
-      >
-        <View style={styles.modal}>
-          <View style={styles.logoutDescription}>
-            <Text></Text>
-          </View>
-        </View>
-      </Modal>
     </View>
   );
 }
@@ -76,11 +101,10 @@ const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
     flexDirection: "column",
-    width: containerWidth,
-    alignSelf: "center",
-    shadowColor: "#000",
-    shadowOpacity: 0.53,
-    shadowRadius: 2.62,
+    width: "70%",
+    // alignSelf: "center",
+    marginHorizontal: "auto",
+    justifyContent: "space-between",
   },
   profileDetailsContainer: {
     flexDirection: "row",
@@ -89,15 +113,38 @@ const styles = StyleSheet.create({
     marginTop: 24,
     height: 80,
   },
+  profileHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    // marginHorizontal:12,
+    // paddingLeft:12
+  },
+  welcomeText: {
+    fontSize: values.fontMid,
+    color: "#382f2f",
+    fontWeight: 400,
+  },
+  firstNameText: {
+    fontSize: values.fontMid,
+    fontWeight: 500,
+  },
   imageContainer: {
-    marginHorizontal: 24,
+    marginHorizontal: 12,
     shadowOpacity: 0.2,
     shadowRadius: 2,
     borderRadius: 40,
   },
-  detailesContainer: {
-    alignItems: "center",
+  image: {
+    height: 100,
+    width: 100,
+  },
+  userNameContainer: {
+    // alignItems: "center",
     justifyContent: "center",
+    alignContent: "center",
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
   logoutContainer: {
     marginVertical: 24,
