@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {  View,  FlatList,  StyleSheet, Dimensions,  TextInput,  TouchableOpacity,  Modal,  Text,  Image,} from "react-native";
+import {  View,  FlatList,  StyleSheet, Dimensions,  TextInput,  TouchableOpacity,  Modal,  Text,  Image, RefreshControl} from "react-native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+import {url} from "../config/url";
 
 import ProductCard from "../components/ProductCard";
 import {getDatas} from "../Data";
@@ -34,8 +35,17 @@ function ProductScreen({navigation, route}) {
   const [oldData, setOldData] = useState(Data);
   const renderItem = ({ item }) => <ProductCard data={item} navigation={navigation}/>;
 
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = React.useCallback(() => {
+      setRefreshing(true);
+      setTimeout(() => {
+      setRefreshing(false);
+      }, 2000);
+  }, []);
+
   useEffect(() => {
-    let url = "http://192.168.0.107:8005";
+    if(refreshing == true) return;
     fetch(url + "/api/v1/admin/products", {
         credentials: 'include',
     })
@@ -51,7 +61,7 @@ function ProductScreen({navigation, route}) {
     .catch(e => {
         console.error(e)
     })
-  }, [])
+  }, [refreshing])
 
   const list_header = () => {
     return (
@@ -80,6 +90,7 @@ function ProductScreen({navigation, route}) {
     }
     return false;
   };
+
   return (
     <View style={styles.container}>
       {/* Header  */}
@@ -170,6 +181,9 @@ function ProductScreen({navigation, route}) {
         <FlatList
           ListHeaderComponent={list_header}
           ListHeaderComponentStyle={styles.addProductButtonContainer}
+          refreshControl= {
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
           contentContainerStyle={{
             justifyContent: "center",
             alignItems: "center",

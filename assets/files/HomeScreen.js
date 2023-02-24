@@ -1,11 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import values from '../config/values';
-import { ScrollView, Text, View, StyleSheet, PermissionsAndroid, Pressable, TouchableOpacity} from "react-native";
+import { ScrollView, Text, View, StyleSheet, PermissionsAndroid, Pressable, TouchableOpacity, ToastAndroid, Platform, RefreshControl} from "react-native";
+import {url} from "../config/url";
 
 import data from './data';
 import OrderCard from "../components/OrderCard";
+import { tokenContext } from "./myContext";
 
 export default function HomeScrren({navigation}){
+    const {logout} = useContext(tokenContext);
     const [homeData, setHomeData]= useState({
         orders: 0,
         n_customers: 0,
@@ -27,11 +30,18 @@ export default function HomeScrren({navigation}){
     });
 
     useEffect(() => {
-        let url = "http://192.168.0.107:8005/api/v1/admin/home";
-        fetch(url, {
+        
+        fetch(url + "/api/v1/admin/home", {
             credentials: 'include',
         })
-        .then(res => res.json())
+        .then(res => {
+            if(res.status == 401) {
+                if(Platform.OS == "android") ToastAndroid.show("Please Login again for security", ToastAndroid.SHORT);
+                console.log("detected")
+                logout();
+            }
+            return res.json()
+        })
         .then(res => {
             if(res.success){
                 console.log('first')
@@ -43,7 +53,7 @@ export default function HomeScrren({navigation}){
             }
         })
         .catch(e => {
-            console.error(e)
+            console.log("HomeScreen fetch error", e)
         })
     }, [])
 

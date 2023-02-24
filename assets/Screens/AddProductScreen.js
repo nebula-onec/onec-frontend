@@ -61,7 +61,7 @@ function AddProductScreen(props) {
   const submitRequest = (values_n) => {
     console.log(values_n);
     values_n.images = []
-    let url = "http://192.168.0.107:8005";
+    let url = "http://192.168.0.109:8005";
     fetch(url + "/api/v1/admin/createproduct", {
       method: "POST",
       credentials: "include",
@@ -70,15 +70,15 @@ function AddProductScreen(props) {
       },
       body: JSON.stringify(values_n),
     })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setLoading(false);
-      })
-      .catch((e) => {
-        console.log(e);
-        setLoading(false);
-      });
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res, "1231231");
+      setLoading(false);
+    })
+    .catch((e) => {
+      console.log(e);
+      setLoading(false);
+    });
   };
 
   return (
@@ -104,8 +104,7 @@ function AddProductScreen(props) {
           console.log("1111asdad")
           setTimeout(() => {
             alert("Submitted!");
-            // submitRequest(values_n)
-            console.log(values_n);
+            submitRequest(values_n)
             formikAction.resetForm();
           }, 1000);
         }}
