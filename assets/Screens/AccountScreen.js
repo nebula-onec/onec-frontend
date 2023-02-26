@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -15,7 +15,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import values from "../config/values";
 
 import { tokenContext } from "../files/myContext";
-import ImageInput from "../components/ImageInput";
 
 const { height, width } = Dimensions.get("window");
 
@@ -45,29 +44,27 @@ function AccountScreen(props) {
   const { logout } = useContext(tokenContext);
   useEffect(()=>{requestPermission();},[])
 
-    const requestPermission = async () => {
-        const {granted} = await ImagePicker.requestCameraPermissionsAsync();
-        if(!granted) alert("You need to enable permission to access your image library");
-    }
+  const requestPermission = async () => {
+      const {granted} = await ImagePicker.requestCameraPermissionsAsync();
+      if(!granted) alert("You need to enable permission to access your image library");
+  }
 
   const ProfileImage = () => {
     return (
-      <View>
+      <View style={styles.image}>
         <Image source={{ uri: imageUri }} style={styles.image} />
       </View>
     )
   }
-  const handlePress = () => {
-    if(!imageUri) selectImage();
-    else {
-        if(Platform.OS=='web'){
-            if(window.confirm("Are you sure you want to delete this image?")){
-              onChangeImage(null);
-            }
-        }
-        else{
-            Alert.alert("Delete", "Are you sure you want to delete this image?",[{text:"Yes", onPress: () => onChangeImage(null)},{text:"No"}]);
-        }
+  const selectImage = async () => {
+    try {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            quality: 1,
+          });
+        setImageUri(result.assets[0].uri);
+    } catch (error) {
+        console.log(error);
     }
 }
 
@@ -79,14 +76,14 @@ function AccountScreen(props) {
             <Text style={styles.welcomeText}>Hello.. </Text>
             <Text style={styles.firstNameText}>{userName.firstName}</Text>
           </View>
-          <TouchableOpacity style={styles.imageContainer}>
+          <TouchableOpacity style={styles.imageContainer} onPress={selectImage}>
             {!imageUri && (
               <MaterialCommunityIcons
                 name="account"
-                size={48}
+                size={64}
               ></MaterialCommunityIcons>
             )}
-            {imageUri && <ImageContainer/>}
+            {imageUri && <ProfileImage/>}
           </TouchableOpacity>
         </View>
       </View>
@@ -132,12 +129,17 @@ const styles = StyleSheet.create({
   imageContainer: {
     marginHorizontal: 12,
     shadowOpacity: 0.2,
-    shadowRadius: 2,
-    borderRadius: 40,
+    shadowRadius: 4,
+    height:68,
+    width:68,
+    borderRadius:34,
+    justifyContent:"center",
+    alignItems:"center"
   },
   image: {
-    height: 100,
-    width: 100,
+    height: 64,
+    width: 64,
+    borderRadius:32,
   },
   userNameContainer: {
     // alignItems: "center",

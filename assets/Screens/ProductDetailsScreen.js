@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOpacity: 0.3,
     shadowRadius: 1,
-    width: "70%",
+    width: "80%",
     maxHeight:320,
   },
   image: {
