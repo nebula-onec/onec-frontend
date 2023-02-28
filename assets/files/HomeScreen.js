@@ -37,15 +37,13 @@ export default function HomeScrren({navigation}){
         .then(res => {
             if(res.status == 401) {
                 if(Platform.OS == "android") ToastAndroid.show("Please Login again for security", ToastAndroid.SHORT);
-                console.log("detected")
+                console.log("401 detected in home screen")
                 logout();
             }
             return res.json()
         })
         .then(res => {
             if(res.success){
-                console.log('first')
-                console.log(res)
                 setHomeData(res.info)
             }
             else {
