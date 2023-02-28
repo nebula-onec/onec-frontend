@@ -7,6 +7,7 @@ import {
   useWindowDimensions,
   FlatList,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 
 import { getData } from "../Data";
@@ -20,113 +21,139 @@ function ProductDetailsScreen({ route, navigation }) {
   const [fullImageId, setFullImageId] = useState(0);
   
   const ListProductImages = ({ item }) => {
-    
     const {imageId}=item;
     return (
       <TouchableOpacity
         onPress={() => {
           setFullImageId(imageId);
         }}
+        style={[styles.smallImageContainer,{}]}
       >
-        <Image source={item.image} style={{ width: 50, height: 50 }} />
+        <Image source={item.image} style={styles.smallImage} />
       </TouchableOpacity>
     );
   };
+  let upperContainerWidth= width<450 ? width : parseInt(width/2) ;
+  let previewImageHeight= ((upperContainerWidth)*62)/100 - 28 ;
 
   return (
-    <View
-      style={[
+    <ScrollView
+      contentContainerStyle={[
         styles.container,
-        { flexDirection: `${width < 350 ? "column" : "row"}` },
+        { flexDirection: `${width < 450 ? "column" : "row"}` },
       ]}
     >
-      <View style={styles.upperContainer}>
-        <View style={styles.imageSliderContainer}>
-          <Image
-            style={styles.image}
-            source={productData.image[fullImageId].image}
-          />
-          <View style={{ flex: 1, overflow: "hidden", width: "100%" }}>
+      <View style={[styles.upperContainer,{width:upperContainerWidth}]}>
+        <View style={[styles.imageSliderContainer,{flexDirection:`${width < 450 ? "column" : "row-reverse"}`}]}>
+          <View style={[styles.imagePreview,{height:previewImageHeight}]}>
+            {console.log(parseInt(previewImageHeight))}
+            <Image
+              style={styles.image}
+              source={productData.image[fullImageId].image}
+            />
+          </View>
+          <ScrollView style={{...styles.imageListContainer,width : `${width < 450 ? (upperContainerWidth*20)/100 : "100%"}`}}>
             <FlatList
               data={productData.image}
               keyExtractor={(item) => item.imageId}
               renderItem={ListProductImages}
-              horizontal={true}
+              horizontal={width<450 ? true : false}
             />
-          </View>
+          </ScrollView>
         </View>
       </View>
-      <View style={styles.lowerContainer}>
+      <View style={[styles.lowerContainer,{width:`${width<450 ? "100%" : "50%"}`}]}>
         <View style={styles.nameContainer}>
           <Text style={styles.name}>{productData.name}</Text>
         </View>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={styles.descriptionAttributeContainer}>
           <Text style={{ fontSize: values.fontSmall }}>Price: </Text>
-          <Text style={{ fontSize: 22 }}>₹ {productData.price}</Text>
+          <Text style={styles.attributeName}>₹ {productData.price}</Text>
         </View>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={styles.descriptionAttributeContainer}>
           <Text style={{ fontSize: values.fontSmall }}>Weight: </Text>
-          <Text style={{ fontSize: 22 }}>{productData.weight}</Text>
+          <Text style={styles.attributeName}>{productData.weight}</Text>
         </View>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={styles.descriptionAttributeContainer}>
           <Text style={{ fontSize: values.fontSmall }}>
             Available Quantity:{" "}
           </Text>
-          <Text style={{ fontSize: 22 }}>{productData.avilable_qty}</Text>
+          <Text style={styles.attributeName}>{productData.avilable_qty}</Text>
         </View>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={styles.descriptionAttributeContainer}>
           <Text style={{ fontSize: values.fontSmall }}>
             Country Of Origin:{" "}
           </Text>
-          <Text style={{ fontSize: 22 }}>{productData.avilable_qty}</Text>
+          <Text style={styles.attributeName}>{productData.avilable_qty}</Text>
         </View>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={styles.descriptionAttributeContainer}>
           <Text style={{ fontSize: values.fontSmall }}>Description: </Text>
-          <Text style={{ fontSize: 22 }}>{productData.avilable_qty}</Text>
+          <Text style={styles.attributeName}>{productData.avilable_qty}</Text>
         </View>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={styles.descriptionAttributeContainer}>
           <Text style={{ fontSize: values.fontSmall }}>: </Text>
-          <Text style={{ fontSize: 22 }}>{productData.avilable_qty}</Text>
+          <Text style={styles.attributeName}>{productData.avilable_qty}</Text>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 12,
-    shadowColor: "#000",
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-    justifyContent: "center",
     backgroundColor: "white",
-    flexWrap: "wrap",
-    maxWidth: 700,
     marginHorizontal: "auto",
+    paddingHorizontal:"auto",
+    width:"100%",
+    maxWidth:800,
+  },
+  upperContainer: {
+    flexDirection: "column",
+    marginRight: 12,
+    justifyContent: "flex-start",
+    maxWidth:320,
+    maxHeight:320,
+  },
+  lowerContainer: {
+    margin: 8,
+    paddingLeft: 20,
   },
   imageSliderContainer: {
     justifyContent: "center",
     alignItems: "center",
+    marginTop:8,
+    width:"100%",
+    maxHeight:320,
+  },
+  imageListContainer:{
+    marginHorizontal:2,
+  },
+  imagePreview:{
+    shadowColor: "#000",
+    shadowOpacity: 0.3,
+    shadowRadius: 1,
+    width: "80%",
+    maxHeight:320,
   },
   image: {
-    width: 150,
-    height: 150,
+    resizeMode: 'cover',
+    width: "100%",
+    height: 'inherit',
+    maxHeight:320,
+    overflow:"visible",
   },
-  upperContainer: {
-    flex: 0.4,
-    flexDirection: "column",
-    marginRight: 12,
-    justifyContent: "center",
-    width: 400,
+  smallImageContainer:{
+    width:60,
+    height:"100%",
+    marginVertical:4,
+    marginHorizontal:4,
+    // borderWidth:1,
+    shadowColor: "#000",
+    shadowOpacity: 0.3,
+    shadowRadius: 1,
   },
-  lowerContainer: {
-    flex: 0.6,
-    margin: 8,
-    width: 400,
-    paddingLeft: 20,
-  },
+  smallImage:{ width: 58, height: 58},
   nameContainer: {
     flexDirection: "row",
     justifyContent: "flex-start",
@@ -135,6 +162,9 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "500",
   },
+  descriptionAttributeContainer:{ flexDirection: "row", alignItems: "center" },
+  attributeName:{ fontSize: values.fontSmall },
+
 });
 
 export default ProductDetailsScreen;
