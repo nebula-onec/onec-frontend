@@ -8,7 +8,7 @@ export default function SplashScreen({ navigation }){
     useEffect(() => {
         token != null ? console.log("token found") : console.log("token not found")
         console.log(token)
-        setTimeout( () => {navigation.replace( token ? "Main" : "Login")}, 2000);
+        setTimeout( () => {navigation.replace( token ? "Main" : "Login")}, 2);
     }, []);
     
     return (

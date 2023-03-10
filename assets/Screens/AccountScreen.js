@@ -120,15 +120,15 @@ const styles = StyleSheet.create({
   welcomeText: {
     fontSize: values.fontMid,
     color: "#382f2f",
-    fontWeight: 400,
+    fontWeight: 'bold',
   },
   firstNameText: {
     fontSize: values.fontMid,
-    fontWeight: 500,
+    fontWeight: 'bold',
   },
   imageContainer: {
     marginHorizontal: 12,
-    shadowOpacity: 0.2,
+    // shadowOpacity: 0.2,
     shadowRadius: 4,
     height:68,
     width:68,

@@ -3,11 +3,13 @@ import { AntDesign, Ionicons, Feather,  Entypo , EvilIcons} from '@expo/vector-i
 
 import values from '../config/values';
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
 
 export default function OrderCard(props){
+    const [cardData, setCardData] = useState(props);
     const navigation = useNavigation();
     const getcolor = () => {
-        let n = parseInt(props.status)
+        let n = parseInt(cardData.status)
         let col; //for color
         if( n == 1 ) col = 'black' 
         else if( n == 2) col = 'black' // to pack order
@@ -17,12 +19,12 @@ export default function OrderCard(props){
     }
     const actionMessage = () => {
         let status, actionButton;
-        if(props.status == 0) actionButton = "Cancelled"
-        else if(props.status == 1) {
+        if(cardData.status == 0) actionButton = "Cancelled"
+        else if(cardData.status == 1) {
             status = "status: Created"
             actionButton = "Mark Packed"
         }
-        else if(props.status == 2){
+        else if(cardData.status == 2){
             status = "status: Packed"
             actionButton = "Mark Delivered"
         }
@@ -30,7 +32,7 @@ export default function OrderCard(props){
         return [status, actionButton]
     }
     const handleAction = ()=> {
-
+        
     }
     const styles = StyleSheet.create({
         current_order: {
@@ -80,7 +82,7 @@ export default function OrderCard(props){
         },
         actionButtonContainer: {
             flexDirection: 'row',
-            backgroundColor: `${props.status == 1 || props.status == 2 ? '#c1d9ff' : 'white'}`,
+            backgroundColor: `${cardData.status == 1 || props.status == 2 ? '#c1d9ff' : 'white'}`,
             paddingVertical: 4,
             paddingHorizontal: 8,
             borderRadius: 12,
@@ -90,17 +92,17 @@ export default function OrderCard(props){
     return (
         <View style={styles.current_order}>
             <View style={styles.current_order_v1}>
-                <Text style={{fontWeight: 'bold', fontSize: 16}}>Order: {props.orderID}</Text><Text>Order-time: {props.time}</Text>
+                <Text style={{fontWeight: 'bold', fontSize: 16}}>Order: {cardData.orderID}</Text><Text>Order-time: {cardData.time}</Text>
             </View>
             <View style={styles.current_order_v1}>
                 <View>
                     <View  style={styles.order_v2}>
                         <Ionicons name="person" size={22} color="black" />
-                        <Text>   {props.name}</Text>
+                        <Text>   {cardData.name}</Text>
                     </View>
                     <View style={styles.order_v2}>
                         <Entypo name="phone" size={22} color="black" />
-                        <Text>   {props.phone}</Text>
+                        <Text>   {cardData.phone}</Text>
                     </View>
                 </View>
                 <View>
@@ -108,9 +110,9 @@ export default function OrderCard(props){
                 </View>
             </View>
             <View>
-                <TouchableOpacity style={styles.current_order_v1} onPress={ () => navigation.navigate("Order Details", {orderID:props.orderID}) }>
+                <TouchableOpacity style={styles.current_order_v1} onPress={ () => navigation.navigate("Order Details", {orderID:cardData.orderID}) }>
                     <TouchableOpacity onPress={handleAction} style={styles.actionButtonContainer}>
-                        {(props.status == 2 || props.status == 1) && <AntDesign name="checkcircleo" size={24} color="black" style={{paddingRight: 4}}/>}
+                        {(cardData.status == 2 || cardData.status == 1) && <AntDesign name="checkcircleo" size={24} color="black" style={{paddingRight: 4}}/>}
                         <Text style={{...styles.actionButton}}>{actionMessage()[1]}</Text>
                     </TouchableOpacity>
                     <View style={{flexDirection: 'row'}}>

@@ -46,7 +46,7 @@ function ProductDetailsScreen({ route, navigation }) {
       <View style={[styles.upperContainer,{width:upperContainerWidth}]}>
         <View style={[styles.imageSliderContainer,{flexDirection:`${width < 450 ? "column" : "row-reverse"}`}]}>
           <View style={[styles.imagePreview,{height:previewImageHeight}]}>
-            {console.log(parseInt(previewImageHeight))}
+            {/* {console.log(parseInt(previewImageHeight))} */}
             <Image
               style={styles.image}
               source={productData.image[fullImageId].image}
