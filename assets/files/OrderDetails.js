@@ -1,8 +1,10 @@
 import {useEffect, useState} from "react";
-import { ScrollView, Text, View, StyleSheet, PermissionsAndroid, Pressable, Image, useWindowDimensions, TouchableOpacity} from "react-native";
+import { ScrollView, Text, View, StyleSheet, Image, useWindowDimensions, TouchableOpacity, Platform, ToastAndroid,} from "react-native";
 import { orderById } from "./orderById";
 import values from "../config/values";
 import { useNavigation } from "@react-navigation/native";
+import { url } from "../config/url";
+import { Toast } from "reactstrap";
 
 export default function OrderDetails({route}) {
     const {width, height} = useWindowDimensions();
@@ -23,8 +25,8 @@ export default function OrderDetails({route}) {
     });
     
     useEffect(()=> {        
-        let url = "http://192.168.0.107:8005/api/v1/admin/order/" + ( route?.params.orderID ? route?.params.orderID : '4');
-        fetch(url, {
+        let url2 = url + "/api/v1/admin/order/" + ( route?.params.orderID ? route?.params.orderID : '4');
+        fetch(url2, {
             credentials: 'include',
         })
         .then(res => res.json())
@@ -33,7 +35,14 @@ export default function OrderDetails({route}) {
                 setData(res.order)
             }
             else {
+                console.log(res.message)
                 console.log('error in orderDetails fetch request')
+                if(Platform.OS == "android"){
+                    ToastAndroid.show("Order Not Found", ToastAndroid.SHORT)
+                }
+                setTimeout(() => {
+                    navigation.goBack()
+                }, 2000)
             }
         })
         .catch(e => {
