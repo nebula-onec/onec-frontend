@@ -46,7 +46,7 @@ export const AuthContextProvider = ({children}) => {
     async function login(id, password){
         let message;
         let url2 = url;
-        return fetch(url2 + "/api/v1/admin/login", {
+        return fetch(url2 + "/api/admin/login", {
             credentials: 'include',
             method: 'POST',
             headers: {

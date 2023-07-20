@@ -15,23 +15,20 @@ export default function HomeScrren({navigation}){
         n_products: 0,
         unavailable_products: 0,
         n_sold: 0,
-        unfulfilled_orders: {
-            number: 0,
-            orders: [
-                {
-                    order_id: 0,
-                    order_date: "2023-02-14T06:03:40.000Z",
-                    order_status: 1,
-                    user_id: 0,
-                    name: "Sample Name"
-                }
-            ]
-        }
+        unfulfilled_orders: [
+            {
+                order_id: 0,
+                order_date: "2023-02-14T06:03:40.000Z",
+                order_status: 1,
+                user_id: 0,
+                name: "Sample Name"
+            }
+        ]
     });
 
     useEffect(() => {
         
-        fetch(url + "/api/v1/admin/home", {
+        fetch(url + "/api/admin/home", {
             credentials: 'include',
         })
         .then(res => {
@@ -87,7 +84,7 @@ export default function HomeScrren({navigation}){
             </View>
             <View style={styles.vertical}>
                 {
-                    homeData.unfulfilled_orders.orders.map( (data, index) => 
+                    homeData.unfulfilled_orders.map( (data, index) => 
                         <OrderCard 
                         orderID={data.order_id}
                         time={data.order_date}

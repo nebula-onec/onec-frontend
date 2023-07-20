@@ -8,32 +8,33 @@
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
-  "proxy": "http://192.168.0.106:8005",
+  "proxy": "http://192.168.80.115:8080",
   "dependencies": {
     "@expo/webpack-config": "^0.17.2",
-    "@react-native-async-storage/async-storage": "^1.17.11",
+    "@react-native-async-storage/async-storage": "1.18.2",
     "@react-navigation/bottom-tabs": "^6.5.2",
     "@react-navigation/native": "^6.1.1",
     "@react-navigation/native-stack": "^6.9.7",
     "@react-navigation/stack": "^6.3.10",
-    "expo": "~47.0.8",
-    "expo-constants": "~14.0.2",
-    "expo-image-picker": "~14.0.2",
-    "expo-secure-store": "~12.0.0",
-    "expo-status-bar": "~1.4.2",
+    "expo": "^49.0.0",
+    "expo-cli": "^6.3.10",
+    "expo-constants": "~14.4.2",
+    "expo-image-picker": "~14.3.1",
+    "expo-secure-store": "~12.3.1",
+    "expo-status-bar": "~1.6.0",
     "formik": "^2.2.9",
-    "react": "18.1.0",
-    "react-dom": "18.1.0",
-    "react-native": "0.70.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native": "0.72.3",
     "react-native-element-dropdown": "^2.5.1",
     "react-native-reactstrap": "^1.0.4",
-    "react-native-safe-area-context": "^4.4.1",
-    "react-native-web": "~0.18.9",
+    "react-native-safe-area-context": "4.6.3",
+    "react-native-web": "~0.19.6",
     "reactstrap": "^9.1.5",
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.20.0"
   },
   "private": true
 }
