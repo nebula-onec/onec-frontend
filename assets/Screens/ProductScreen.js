@@ -46,13 +46,14 @@ function ProductScreen({navigation, route}) {
 
   useEffect(() => {
     if(refreshing == true) return;
-    fetch(url + "/api/v1/admin/products", {
+    fetch(url + "/api/admin/products", {
         credentials: 'include',
     })
     .then(res => res.json())
     .then(res => {
         if(res.success){
           setProductsData(res.products)
+          console.log(res.products)
         }
         else {
           console.log('error in Product Screen fetch request')

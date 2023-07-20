@@ -24,7 +24,8 @@ function ProductCard({ data, navigation, root }) {
     imageWidth = 150;
     imageHeight = 100;
   }
-  let { image_url, product_name, category_id, price, stock, product_id } = data;
+  let { images, product_name, category_id, price, stock, product_id } = data;
+  let image_url = null;
   if(!image_url) image_url = "https://fastly.picsum.photos/id/2/536/354.jpg?hmac=EVqChBVjwdZVaEJoMQgFSzZhsD72o5119rYcaw33YBo"
   return (
     <TouchableOpacity
