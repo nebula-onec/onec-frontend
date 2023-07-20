@@ -64,6 +64,7 @@ export const AuthContextProvider = ({children}) => {
         .catch(e => {
             console.error(e)
         })
+        // setToken(123);
     }
 
     function logout(){
