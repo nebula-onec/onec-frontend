@@ -53,7 +53,7 @@ function ProductScreen({navigation, route}) {
     .then(res => {
         if(res.success){
           setProductsData(res.products)
-          console.log(res.products)
+          console.log(res)
         }
         else {
           console.log('error in Product Screen fetch request')
