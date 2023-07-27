@@ -36,9 +36,9 @@ The other two repos are:
 
 ## A Quick Look at Admin View
 <div style="display: flex; flex-direction: row" fload="left">
-  <img src="frame1.webp" width="290px">
-  <img src="frame2.webp" width= "300px">
-  <img src="frame3.webp" width= "300px">
+  <img src="frame1.webp" width="260px">
+  <img src="frame2.webp" width= "270px">
+  <img src="frame3.webp" width= "270px">
 </div>
 
 ---
