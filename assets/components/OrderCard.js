@@ -1,30 +1,34 @@
-import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import { Text, View, TouchableOpacity, StyleSheet,Image } from "react-native";
 import { AntDesign, Ionicons, Feather,  Entypo , EvilIcons} from '@expo/vector-icons';
 
 import values from '../config/values';
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { url } from "../config/url";
+import { CardText } from "reactstrap";
 
 export default function OrderCard(props){
     const [cardData, setCardData] = useState(props);
     const navigation = useNavigation();
     const getcolor = () => {
-        let n = parseInt(cardData.status)
+        let n = parseInt(cardData.order_status)
         let col; //for color
         if( n == 1 ) col = 'black' 
         else if( n == 2) col = 'black' // to pack order
         else if( n == 3) col = '#029613' // to deliver
         else col = values.red // delivered
-        return col
+        return col;
     }
+    const [isLoading,setIsLoading] = useState(false);
+    const [statusChanged,setStatusChanged] = useState(true);
     const actionMessage = () => {
         let status, actionButton;
-        if(cardData.status == 0) actionButton = "Cancelled"
-        else if(cardData.status == 1) {
+        if(cardData.order_status == 0) actionButton = "Cancelled"
+        else if(cardData.order_status == 1) {
             status = "status: Created"
             actionButton = "Mark Packed"
         }
-        else if(cardData.status == 2){
+        else if(cardData.order_status == 2){
             status = "status: Packed"
             actionButton = "Mark Delivered"
         }
@@ -32,7 +36,38 @@ export default function OrderCard(props){
         return [status, actionButton]
     }
     const handleAction = ()=> {
-        
+        if(cardData.order_status==3 || cardData.order_status==0){
+            return;
+        }
+        console.log(cardData)
+        setIsLoading(true);
+        // if(isLoading){
+            fetch(url + "/api/admin/changeorderstatus", {
+                credentials: 'include',
+                method: 'POST',
+                headers: {
+                    "Content-Type":"application/json",
+                },
+                body: JSON.stringify({
+                    "order_id": cardData.order_id,
+                    "new_status": cardData.order_status+1,
+                })
+            })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+                if(res.success==false){
+                    setStatusChanged(false);
+                }
+                else{
+                    setCardData(res.order);
+                }
+                setIsLoading(false);
+            }, [])
+            .catch(e => {
+                console.error(e)
+            })
+        // }
     }
     const styles = StyleSheet.create({
         current_order: {
@@ -82,7 +117,7 @@ export default function OrderCard(props){
         },
         actionButtonContainer: {
             flexDirection: 'row',
-            backgroundColor: `${cardData.status == 1 || props.status == 2 ? '#c1d9ff' : 'white'}`,
+            backgroundColor: `${cardData.order_status == 1 || cardData.order_status == 2 ? '#c1d9ff' : 'white'}`,
             paddingVertical: 4,
             paddingHorizontal: 8,
             borderRadius: 12,
@@ -92,7 +127,7 @@ export default function OrderCard(props){
     return (
         <View style={styles.current_order}>
             <View style={styles.current_order_v1}>
-                <Text style={{fontWeight: 'bold', fontSize: 16}}>Order: {cardData.orderID}</Text><Text>Order-time: {cardData.time}</Text>
+                <Text style={{fontWeight: 'bold', fontSize: 16}}>Order: {cardData.order_id}</Text><Text>Order-time: {cardData.order_date}</Text>
             </View>
             <View style={styles.current_order_v1}>
                 <View>
@@ -111,10 +146,18 @@ export default function OrderCard(props){
             </View>
             <View>
                 <TouchableOpacity style={styles.current_order_v1} onPress={ () => navigation.navigate("Order Details", {orderID:cardData.orderID}) }>
-                    <TouchableOpacity onPress={handleAction} style={styles.actionButtonContainer}>
-                        {(cardData.status == 2 || cardData.status == 1) && <AntDesign name="checkcircleo" size={24} color="black" style={{paddingRight: 4}}/>}
-                        <Text style={{...styles.actionButton}}>{actionMessage()[1]}</Text>
-                    </TouchableOpacity>
+                    {isLoading && <Image source={require("../images/loading_32.gif")} style={{width:22,height:22}}/>}
+                    {!isLoading && 
+                        <TouchableOpacity onPress={handleAction} style={styles.actionButtonContainer}>
+                            {(cardData.order_status == 2 || cardData.order_status == 1) && <AntDesign name="checkcircleo" size={24} color="black" style={{paddingRight: 4}}/>}
+                            {
+                                setStatusChanged && <Text style={{...styles.actionButton}}>{actionMessage()[1]}</Text>
+                            }
+                            {
+                                !setStatusChanged && <Text style={{...styles.actionButton}}>Try Again</Text>
+                            }
+                        </TouchableOpacity>
+                    }
                     <View style={{flexDirection: 'row'}}>
                         <Text style={styles.order_v3_text} >More Details </Text>
                         <AntDesign name="arrowright" size={22} color="black" />

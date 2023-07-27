@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { url } from "../config/url";
 import {  View,  FlatList,  StyleSheet,  TextInput,  Image, RefreshControl} from "react-native";
 import { AntDesign, } from "@expo/vector-icons";
 import values from "../config/values";
@@ -7,8 +8,30 @@ import OrderCard from "../components/OrderCard";
 import data from "../files/data";
 
 function OrderScreen({navigation}) {
-  const [orderData, setOrderData] = useState(data);
-  const [oldOrderData, setOldOrderData] = useState(data);
+  const [orderData, setOrderData] = useState([]);
+  const [oldOrderData, setOldOrderData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetch(url + "/api/admin/orders", {
+      credentials: 'include',
+  })
+  .then(res => res.json())
+  .then(res => {
+      if(res.success){
+        setOrderData(res.orders)
+        console.log("orders", res.orders)
+      }
+      else {
+        console.log('error in OrdersScreen fetch request')
+      }
+  }, [])
+  .catch(e => {
+      console.error(e)
+  })
+  }, [])
+
+
   const renderItem = ({ item }) => {
     return (
       <OrderCard 

@@ -88,10 +88,10 @@ export default function HomeScrren({navigation}){
                 {
                     homeData?.unfulfilled_orders?.map( (data, index) => 
                         <OrderCard 
-                        orderID={data.order_id}
-                        time={data.order_date}
-                        status={data.order_status}
-                        userId={data.user_id}
+                        order_id={data.order_id}
+                        order_date={data.order_date}
+                        order_status={data.order_status}
+                        user_id={data.user_id}
                         name={data.name}
                         phone={data.phone}
                         key={index}
