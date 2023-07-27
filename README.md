@@ -52,5 +52,15 @@ The other two repos are:
 - [ ] Publish the Android App for Admin's View
 
 --- 
-### Contributors
+### Contributors:
 
+![image](https://github.com/adarsh-rawat/bazaar/assets/43747987/20c6e3b3-2e86-48da-b0ea-c2e06dc6411c)
+
+--- 
+## Contact
+Feel free to reach out for any query or a quick chat.
+
+Adarsh: [@adarsh-rawat](https://github.com/adarsh-rawat) | [LinkedIn](https://www.linkedin.com/in/rawat-adarsh/) <br><br>
+Meet: [@mit2561](https://github.com/mit2561) | [LinkedIn](https://www.linkedin.com/in/patel-mit25/) <br><br>
+Dipanshu: [@dipanshuj](https://github.com/DipanshuJ/) | [LinkedIn](https://www.linkedin.com/in/dipanshu-jain-5b90aa228/) <br><br>
+Rajat: [@rajat8658](https://github.com/rajat8658) | [LinkedIn](https://www.linkedin.com/in/rajatmoharana/)<br>
