@@ -4,8 +4,7 @@ import { AntDesign, Ionicons, Feather,  Entypo , EvilIcons} from '@expo/vector-i
 import values from '../config/values';
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { url } from "../config/url";
-import { CardText } from "reactstrap";
+import { serverUrl } from "../config/url";
 
 export default function OrderCard(props){
     const [cardData, setCardData] = useState(props);
@@ -42,7 +41,7 @@ export default function OrderCard(props){
         console.log(cardData)
         setIsLoading(true);
         // if(isLoading){
-            fetch(url + "/api/admin/changeorderstatus", {
+            fetch(serverUrl + "/api/admin/changeorderstatus", {
                 credentials: 'include',
                 method: 'POST',
                 headers: {
@@ -163,8 +162,7 @@ export default function OrderCard(props){
                         <AntDesign name="arrowright" size={22} color="black" />
                     </View>
                 </TouchableOpacity>
-            </View>
-            
+            </View>            
         </View>
     )
 }

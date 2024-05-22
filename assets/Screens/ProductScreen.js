@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {  View,  FlatList,  StyleSheet, Dimensions,  TextInput,  TouchableOpacity,  Modal,  Text,  Image, RefreshControl} from "react-native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
-import {url} from "../config/url";
+import {serverUrl, url} from "../config/url";
 
 import ProductCard from "../components/ProductCard";
 import {getDatas} from "../Data";
@@ -46,7 +46,7 @@ function ProductScreen({navigation, route}) {
 
   useEffect(() => {
     if(refreshing == true) return;
-    fetch(url + "/api/admin/products", {
+    fetch(serverUrl + "/api/admin/products", {
         credentials: 'include',
     })
     .then(res => res.json())

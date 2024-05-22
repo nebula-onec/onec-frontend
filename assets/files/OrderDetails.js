@@ -3,7 +3,7 @@ import { ScrollView, Text, View, StyleSheet, Image, useWindowDimensions, Touchab
 import { orderById } from "./orderById";
 import values from "../config/values";
 import { useNavigation } from "@react-navigation/native";
-import { url } from "../config/url";
+import { serverUrl, url } from "../config/url";
 import { Toast } from "reactstrap";
 
 export default function OrderDetails({route}) {
@@ -25,7 +25,7 @@ export default function OrderDetails({route}) {
     });
     
     useEffect(()=> {        
-        let url2 = url + "/api/v1/admin/order/" + ( route?.params.orderID ? route?.params.orderID : '4');
+        let url2 = serverUrl + "/api/v1/admin/order/" + ( route?.params.orderID ? route?.params.orderID : '4');
         fetch(url2, {
             credentials: 'include',
         })

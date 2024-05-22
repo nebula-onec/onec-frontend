@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import values from '../config/values';
 import { ScrollView, Text, View, StyleSheet, PermissionsAndroid, Pressable, TouchableOpacity, ToastAndroid, Platform, RefreshControl} from "react-native";
-import {url} from "../config/url";
+import {serverUrl} from "../config/url";
 
 import data from './data';
 import OrderCard from "../components/OrderCard";
@@ -30,7 +30,7 @@ export default function HomeScrren({navigation}){
 
     useEffect(() => {
         
-        fetch(url + "/api/admin/home", {
+        fetch(serverUrl + "/api/admin/home", {
             credentials: 'include',
         })
         .then(res => {

@@ -1,5 +1,5 @@
 import React, {createContext, useEffect, useState} from 'react';
-import {url} from '../config/url.js';
+import {serverUrl, url} from '../config/url.js';
 import * as SecureStore from 'expo-secure-store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform , ToastAndroid} from 'react-native';
@@ -45,8 +45,7 @@ export const AuthContextProvider = ({children}) => {
     
     async function login(id, password){
         let message;
-        let url2 = url;
-        return fetch(url2 + "/api/admin/login", {
+        return fetch(serverUrl + "/api/admin/login", {
             credentials: 'include',
             method: 'POST',
             headers: {
