@@ -36,9 +36,9 @@ The other two repos are:
 
 ## A Quick Look at Admin View
 <div style="display: flex; flex-direction: row" fload="left">
-  <img src="https://raw.githubusercontent.com/adarsh-rawat/bazaar/main/frame1.png" width="260px">
-  <img src="https://raw.githubusercontent.com/adarsh-rawat/bazaar/main/frame2.png" width= "270px">
-  <img src="https://raw.githubusercontent.com/adarsh-rawat/bazaar/main/frame3.png" width= "270px">
+  <img src="https://raw.githubusercontent.com/adarsh-rawat/bazaar/main/assets/images/frame1.png" width="260px">
+  <img src="https://raw.githubusercontent.com/adarsh-rawat/bazaar/main/assets/images/frame2.png" width= "270px">
+  <img src="https://raw.githubusercontent.com/adarsh-rawat/bazaar/main/assets/images/frame3.png" width= "270px">
 </div>
 
 ---
