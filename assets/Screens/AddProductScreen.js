@@ -72,7 +72,6 @@ function AddProductScreen(props) {
     })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res, "1231231");
       setLoading(false);
     })
     .catch((e) => {

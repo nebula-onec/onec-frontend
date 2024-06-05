@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "strict": true
+  },
+  "extends": "expo/tsconfig.base"
+}

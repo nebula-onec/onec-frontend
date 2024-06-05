@@ -1,61 +1,28 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import values from '../config/values';
-import { ScrollView, Text, View, StyleSheet, PermissionsAndroid, Pressable, TouchableOpacity, ToastAndroid, Platform, RefreshControl} from "react-native";
-import {serverUrl} from "../config/url";
+import { ScrollView, Text, View, StyleSheet, Pressable} from "react-native";
 
-import data from './data';
 import OrderCard from "../components/OrderCard";
-import { tokenContext } from "./myContext";
+import { getHomeScreenData } from "../../api/homeController";
+import { HomeScreenData } from "../../types/home";
 
-export default function HomeScrren({navigation}){
-    const {logout} = useContext(tokenContext);
-    const [homeData, setHomeData]= useState({});
-    // format of homeData
-    //  {
-    //     orders: 0,
-    //     n_customers: 0,
-    //     n_products: 0,
-    //     unavailable_products: 0,
-    //     n_sold: 0,
-    //     unfulfilled_orders: [
-    //         {
-    //             order_id: 0,
-    //             order_date: "2023-02-14T06:03:40.000Z",
-    //             order_status: 1,
-    //             user_id: 0,
-    //             name: "Sample Name"
-    //         }
-    //     ]
-    // }
+export default function HomeScrren(){
+    const [homeData, setHomeData] = useState<HomeScreenData>({} as HomeScreenData);
+    const [screenMessage, setScreenMessage] = useState("Loading...");
 
     useEffect(() => {
-        
-        fetch(serverUrl + "/api/admin/home", {
-            credentials: 'include',
-        })
+        getHomeScreenData()
         .then(res => {
-            if(res.status == 401) {
-                if(Platform.OS == "android") ToastAndroid.show("Please Login again for security", ToastAndroid.SHORT);
-                console.log("401 detected in home screen")
-                logout();
-            }
-            return res.json()
-        })
-        .then(res => {
-            if(res.success){
-                setHomeData(res.info)
-            }
-            else {
-                console.log('error in homescreen fetch request')
-            }
+            if(res === null) throw new Error("Server Not Responding");
+            setHomeData(res);
         })
         .catch(e => {
-            console.log("HomeScreen fetch error", e)
+            setScreenMessage("Error while fetching data. " + e )
         })
     }, [])
 
     return (
-        <ScrollView contentContainerStyle={styles.homeContainer}>
+        homeData ? <ScrollView contentContainerStyle={styles.homeContainer}>
             <Pressable style={styles.pressableContainer}>
             <View style={styles.horizontal}>
                 <View style={styles.horizontal1}>
@@ -84,7 +51,7 @@ export default function HomeScrren({navigation}){
                     <Text style={{fontSize: 22}}>{homeData.unavailable_products + "\n"}</Text> Sold Out Products
                 </Text>
             </View>
-            <View style={styles.vertical}>
+            <View>
                 {
                     homeData?.unfulfilled_orders?.map( (data, index) => 
                         <OrderCard 
@@ -101,6 +68,7 @@ export default function HomeScrren({navigation}){
             </View>
             </Pressable>
         </ScrollView>
+        : <Text>{screenMessage}</Text>
     )
 }
 

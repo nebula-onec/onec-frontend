@@ -3,8 +3,9 @@ import { ScrollView, Text, View, StyleSheet, Image, useWindowDimensions, Touchab
 import { orderById } from "./orderById";
 import values from "../config/values";
 import { useNavigation } from "@react-navigation/native";
-import { serverUrl, url } from "../config/url";
 import { Toast } from "reactstrap";
+import { getOrderById } from "../../api/orderController";
+import ProductCardInOrderDetails from "../components/ProductCardInOrderDetails";
 
 export default function OrderDetails({route}) {
     const {width, height} = useWindowDimensions();
@@ -25,24 +26,18 @@ export default function OrderDetails({route}) {
     });
     
     useEffect(()=> {        
-        let url2 = serverUrl + "/api/v1/admin/order/" + ( route?.params.orderID ? route?.params.orderID : '4');
-        fetch(url2, {
-            credentials: 'include',
-        })
-        .then(res => res.json())
+        getOrderById( route?.params.orderID ? route?.params.orderID : '4')
         .then(res => {
-            if(res.success){
-                setData(res.order)
-            }
+            if(res !== null) 
+                setData(res)
             else {
-                console.log(res.message)
-                console.log('error in orderDetails fetch request')
                 if(Platform.OS == "android"){
                     ToastAndroid.show("Order Not Found", ToastAndroid.SHORT)
                 }
-                setTimeout(() => {
-                    navigation.goBack()
-                }, 2000)
+                else {
+                    console.log("Order Not Found")
+                }
+                throw new Error("Order Not Found")
             }
         })
         .catch(e => {
@@ -51,35 +46,11 @@ export default function OrderDetails({route}) {
         })
     }, [])
 
-    const Product = (props, index) => {
-        return (
-            <TouchableOpacity 
-                onPress={() => navigation.navigate("ProductDetails", {itemId:props.product_id})}
-                style={ width > 700 ? styles.productContainerDesktop : styles.productContainerMobile} 
-                key={index}>
-                <View style={styles.imageContainer}>
-                    <Image
-                        resizeMode='cover'
-                        style={styles.image}
-                        source={require('../images/icon_150.png')} 
-                        />
-                </View>
-                <View style={{flex: 1}}>
-                    <Text style={styles.prodcutHead}>Name: <Text style={styles.value}>{props.name}</Text></Text>
-                    <Text style={styles.field}>Product ID: <Text style={styles.value}>{props.product_id}</Text></Text>
-                    <Text style={styles.field}>Selling Price: <Text style={styles.value}>{props.price}</Text></Text>
-                    <Text style={styles.field}>Units Ordered: <Text style={styles.value}>{props.quantity}</Text></Text>
-                    <Text style={styles.field}>Total: <Text style={styles.value}> {props.total_price}</Text></Text>
-                </View>
-            </TouchableOpacity>
-        )
-    }
     
     return (
         <ScrollView style={styles.outerContainer}
           contentContainerStyle={styles.innerContainer}
         >
-            <Text>Order Details</Text>
             <View style={{marginVertical: 16}}>
                 <Text style={styles.heading}>Order ID: {data.orderID}</Text>
                 <Text style={styles.field}>Date: <Text style={styles.value}>{data.order_date}</Text></Text>
@@ -90,7 +61,9 @@ export default function OrderDetails({route}) {
                 <Text style={styles.field}>Address: <Text style={styles.value}>{ "\n" + data.address[0] + "\n" + data.address[1] + "\n" + data.address[2] + "\n" + data.address.pincode}</Text></Text>
             </View>
             <View style={ width > 700 ? styles.productListContainerDesktop : styles.productListContainerMobile}>
-                {data.products && data.products.map((d, ind) => Product(d, ind))}
+                {data.products && data.products.map((d, ind) => {
+                    return <ProductCardInOrderDetails data={d} index={ind} navigaiton={navigation}/>
+                })}
             </View>
             <View style={{marginTop: 16, marginBottom: 16, paddingVertical: 16, borderTopColor: '#d9d9d9', borderTopWidth: 1, textAlign: 'right', flex: 1, alignItems: 'flex-end'}}>
                 <Text>Order Summary</Text>
@@ -121,25 +94,6 @@ const styles = StyleSheet.create({
     },
     productListContainerMobile:{
         flexDirection: 'column',
-    },
-    productContainerMobile: {
-        display: "flex",
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        marginVertical: 16,
-        padding: 16,
-        backgroundColor: '#f1f1f1',
-        borderRadius: 16,
-    },
-    productContainerDesktop: {
-        display: "flex",
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        marginVertical: 16,
-        padding: 16,
-        backgroundColor: '#f1f1f1',
-        borderRadius: 16,
-        width: '47%',
     },
     image: {
         width: 80,

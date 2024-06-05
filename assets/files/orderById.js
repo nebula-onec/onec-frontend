@@ -21,7 +21,7 @@ export const orderById = {
             price: "23",
             quantity: 2,
             product_image_url: "",
-            product_name: "Murga Brand Shilajit",
+            product_name: "Murga Brand",
             total_for_this_product: "46"
         },
         {
@@ -29,7 +29,7 @@ export const orderById = {
             price: "23",
             quantity: 2,
             product_image_url: "",
-            product_name: "Murga Brand Shilajit",
+            product_name: "Murga Brand",
             total_for_this_product: "46"
         },
         {
@@ -37,7 +37,7 @@ export const orderById = {
             price: "23",
             quantity: 2,
             product_image_url: "",
-            product_name: "Murga Brand Shilajit",
+            product_name: "Murga Brand",
             total_for_this_product: "46"
         },
         {
@@ -45,7 +45,7 @@ export const orderById = {
             price: "24",
             quantity: 1,
             product_image_url: "",
-            product_name: "Kachua Chaap Agarbatti",
+            product_name: "Kachua Chaap",
             total_for_this_product: "46"
         }
     ]

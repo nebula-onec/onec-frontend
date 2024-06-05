@@ -5,6 +5,7 @@ import {serverUrl, url} from "../config/url";
 
 import ProductCard from "../components/ProductCard";
 import {getDatas} from "../Data";
+import { getAllProductsApi } from "../../api/productController";
 
 const { width } = Dimensions.get("window");
 let col = 1;
@@ -22,15 +23,15 @@ function ProductScreen({navigation, route}) {
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState(Data);
   const [productsData, setProductsData] = useState([
-    {
-      product_id: 1,
-      product_name: "Sample Product Name",
-      price: 14500,
-      category_id: null,
-      description_short: "This is ample description",
-      stock: 100,
-      image_url: null
-    }
+    // {
+    //   product_id: 1,
+    //   product_name: "Sample Product Name",
+    //   price: 14500,
+    //   category_id: null,
+    //   description_short: "This is ample description",
+    //   stock: 100,
+    //   images: ''
+    // }
   ])
   const [oldData, setOldData] = useState(Data);
   const renderItem = ({ item }) => <ProductCard data={item} navigation={navigation}/>;
@@ -46,17 +47,14 @@ function ProductScreen({navigation, route}) {
 
   useEffect(() => {
     if(refreshing == true) return;
-    fetch(serverUrl + "/api/admin/products", {
-        credentials: 'include',
-    })
-    .then(res => res.json())
+    getAllProductsApi()
     .then(res => {
         if(res.success){
           setProductsData(res.products)
           console.log(res)
         }
         else {
-          console.log('error in Product Screen fetch request')
+          console.log('error in Product Screen request')
         }
     }, [])
     .catch(e => {

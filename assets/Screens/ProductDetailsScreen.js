@@ -29,7 +29,7 @@ function ProductDetailsScreen({ route, navigation }) {
         }}
         style={[styles.smallImageContainer,{}]}
       >
-        <Image source={item.image} style={styles.smallImage} />
+        <Image source={item.images} style={styles.smallImage} />
       </TouchableOpacity>
     );
   };
@@ -49,12 +49,12 @@ function ProductDetailsScreen({ route, navigation }) {
             {/* {console.log(parseInt(previewImageHeight))} */}
             <Image
               style={styles.image}
-              source={productData.image[fullImageId].image}
+              source={productData.images[fullImageId].image}
             />
           </View>
           <ScrollView style={{...styles.imageListContainer,width : `${width < 450 ? (upperContainerWidth*20)/100 : "100%"}`}}>
             <FlatList
-              data={productData.image}
+              data={productData.images}
               keyExtractor={(item) => item.imageId}
               renderItem={ListProductImages}
               horizontal={width<450 ? true : false}

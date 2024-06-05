@@ -5,9 +5,11 @@ import values from '../config/values';
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { serverUrl } from "../config/url";
+import { changeOrderStatusApi } from "../../api/orderController";
 
 export default function OrderCard(props){
     const [cardData, setCardData] = useState(props);
+    console.log(props)    
     const navigation = useNavigation();
     const getcolor = () => {
         let n = parseInt(cardData.order_status)
@@ -40,22 +42,9 @@ export default function OrderCard(props){
         }
         console.log(cardData)
         setIsLoading(true);
-        // if(isLoading){
-            fetch(serverUrl + "/api/admin/changeorderstatus", {
-                credentials: 'include',
-                method: 'POST',
-                headers: {
-                    "Content-Type":"application/json",
-                },
-                body: JSON.stringify({
-                    "order_id": cardData.order_id,
-                    "new_status": cardData.order_status+1,
-                })
-            })
-            .then(res => res.json())
+        changeOrderStatusApi(cardData.order_id, cardData.order_status+1)
             .then(res => {
-                console.log(res)
-                if(res.success==false){
+                if(res?.success==false){
                     setStatusChanged(false);
                 }
                 else{
@@ -66,7 +55,6 @@ export default function OrderCard(props){
             .catch(e => {
                 console.error(e)
             })
-        // }
     }
     const styles = StyleSheet.create({
         current_order: {

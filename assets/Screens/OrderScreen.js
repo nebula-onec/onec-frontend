@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { url } from "../config/url";
 import {  View,  FlatList,  StyleSheet,  TextInput,  Image, RefreshControl} from "react-native";
 import { AntDesign, } from "@expo/vector-icons";
 import values from "../config/values";
 import OrderCard from "../components/OrderCard";
-
-import data from "../files/data";
+import { getAllOrders } from "../../api/orderController";
 
 function OrderScreen({navigation}) {
   const [orderData, setOrderData] = useState([]);
@@ -13,22 +11,10 @@ function OrderScreen({navigation}) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch(url + "/api/admin/orders", {
-      credentials: 'include',
-  })
-  .then(res => res.json())
-  .then(res => {
-      if(res.success){
-        setOrderData(res.orders)
-        console.log("orders", res.orders)
-      }
-      else {
-        console.log('error in OrdersScreen fetch request')
-      }
-  }, [])
-  .catch(e => {
-      console.error(e)
-  })
+    getAllOrders()
+      .then(res => {
+          setOrderData(res)
+      })
   }, [])
 
 
